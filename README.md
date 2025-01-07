@@ -1,3 +1,9 @@
+# Driver-input Heatmap
+This tool creates an interactive heatmap for real-time performance analysis for drivers. It uses live data (brake, throttle, steering angle, and RTK GPS) to generate heatmaps for real-time feedback. Compare current laps to previous ones on any parameter to identify trends and optimize performance. 
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
