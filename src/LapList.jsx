@@ -7,6 +7,7 @@ const LapList = () => {
     { id: 1, time: '1:30.123' },
     { id: 2, time: '1:29.876' },
     { id: 3, time: '1:28.654' },
+    { id: 4, time: '1:27.542 '}
   ];
 
   return (
