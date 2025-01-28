@@ -4,7 +4,7 @@ import json
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"insert input file path here"
+sample_logfile = r"input file path"
 
 mdf = MDF(sample_logfile)
 # print("Available Channels:")
@@ -59,15 +59,24 @@ def convert_mdf_to_json(input_file, output_file, selected_signals):
 
 
 
-sample_output = r"insert output file path here"
+sample_output = r"output file path"
 
 # Define the signals you want to extract
 selected_signals = [
-    "FSM_brakePressureFront",  # Brake pressure
+    "FSM_brakePressureFront",  # Front brake pressure
+    "VSM_brakePressureRear",   # Rear brake pressure
     "AMK_FL_ActualVelocity",   # Front-left wheel actual velocity
     "AMK_FR_ActualVelocity",   # Front-right wheel actual velocity
     "AMK_BL_ActualVelocity",   # Back-left wheel actual velocity
     "AMK_BR_ActualVelocity",   # Back-right wheel actual velocity
+    "SBG_Accel_X",             # X-acceleration
+    "SBG_Accel_Y",             # Y-acceleration
+    "FSM_throttlePos",         # throttle position
+    "FR_Calibrated_Output",    # load cell
+    "RL_Calibrated_Output",    # load cell
+    "SBG_Latitude_Acc",        # position
+    "SBG_Longitude_Acc",       # position
+    "FSM_steeringWheelAngle",  # swangle
     "HVI_Voltage",             # Power: Voltage
     "HVI_Current",             # Power: Current
     "HVI_Power"                # Power: Power
