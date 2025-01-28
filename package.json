@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "dev": "vite",
-    "build": "vite build", 
+    "build": "vite build",
     "preview": "vite preview",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -38,6 +38,6 @@
     ]
   },
   "devDependencies": {
-    "vite": "^6.0.6"
+    "vite": "^6.0.7"
   }
 }
