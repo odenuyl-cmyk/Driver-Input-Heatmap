@@ -5,10 +5,10 @@ import mdfreader
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"input file path"
-sample_csv = r"csv file path"
+#sample_logfile = r"input file path"
+#sample_csv = r"csv file path"
 
-mdf = MDF(sample_logfile)
+#mdf = MDF(sample_logfile)
 # print("Available Channels:")
 # print(mdf.channels_db)
 
@@ -38,8 +38,8 @@ selected_signals = [
 
 # Function to convert MDF file to JSON with selected channels
 
-yop = mdfreader.Mdf(sample_logfile, channel_list=selected_signals, convert_after_read=False)
-yop.export_to_csv(sampling=0.01)
+#yop = mdfreader.Mdf(sample_logfile, channel_list=selected_signals, convert_after_read=False)
+#yop.export_to_csv(sampling=0.01)
 
 import pandas as pd
 
@@ -47,7 +47,7 @@ def csv_to_json(csv_file, json_file):
     df = pd.read_csv(csv_file)
     df.to_json(json_file, orient="records", indent=4)
 
-csv_to_json("/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile2024-12-14_13-19-07.csv", "/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/data.json")
+csv_to_json("/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/src/spa_raceline.csv", "/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/spa_raceline.json")
 
 def convert_mdf_to_json(input_file, output_file, selected_signals):
     # load the MDF file
