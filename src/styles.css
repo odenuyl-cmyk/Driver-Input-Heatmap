@@ -51,8 +51,16 @@ div.dashboard {
   margin: 5px 0;
 }
 
-.heatmap, .map {
-  height: 200px;
+.map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #c86b6b;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+}
+
+.heatmap {
   display: flex;
   align-items: center;
   justify-content: center;

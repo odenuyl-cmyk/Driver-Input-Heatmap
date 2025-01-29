@@ -56,9 +56,6 @@ def convert_mdf_to_json(input_file, output_file, selected_signals):
     with open(output_file, 'w') as json_file:
         json.dump(data_dict, json_file, indent=4)
 
-
-
-
 sample_output = r"output file path"
 
 # Define the signals you want to extract
