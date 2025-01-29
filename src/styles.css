@@ -68,3 +68,8 @@ div.dashboard {
   border: 1px dashed #ccc;
   border-radius: 8px;
 }
+
+canvas {
+  display: block;
+  border: 1px solid black;
+}

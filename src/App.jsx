@@ -27,8 +27,8 @@ const App = () => {
         <ControlHeatmap />
         <TrackMap />*/}
         <LapList />
-        <TrackMap />
         <ControlHeatmap />
+        <TrackMap />
       </div>
     </div>
   );
