@@ -5,8 +5,8 @@ import mdfreader
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"input file path"
-sample_csv = r"csv file path"
+sample_logfile = r"C:\Users\saish\driver-input-heatmap\logfile2024-12-14_13-19-07.mdf"
+sample_csv = r"C:\Users\saish\driver-input-heatmap\logfile2024-12-14_13-19-07.csv"
 
 mdf = MDF(sample_logfile)
 # print("Available Channels:")
@@ -47,7 +47,7 @@ def csv_to_json(csv_file, json_file):
     df = pd.read_csv(csv_file)
     df.to_json(json_file, orient="records", indent=4)
 
-csv_to_json("/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile2024-12-14_13-19-07.csv", "/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/data.json")
+csv_to_json(sample_csv, sample_logfile)
 
 def convert_mdf_to_json(input_file, output_file, selected_signals):
     # load the MDF file
@@ -91,7 +91,7 @@ def convert_mdf_to_json(input_file, output_file, selected_signals):
         json.dump(data_dict, json_file, indent=4)
 
 
-sample_output = r"output file path"
+sample_output = r"C:\Users\saish\driver-input-heatmap\data.json"
 
 # Define the signals you want to extract
 

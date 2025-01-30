@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 
+
+// drawing out track curve
 const CanvasTest = () => {
   const canvasRef = useRef(null);
 
