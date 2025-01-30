@@ -5,18 +5,21 @@ import ControlHeatmap from './ControlHeatmap.jsx';
 import CanvasTest from './RaceLine.jsx';
 import Spline from './TrackMap.jsx';
 import TrackMap from './TrackMap.jsx';
+import SteeringWheel from './SteeringWheel.jsx';
 import Graph from './Graphs.jsx';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale } from 'chart.js';
 
 const App = () => {
-  const coordinates = [
-    { x: 1, y: 5 },
-    { x: 2, y: 10 },
-    { x: 3, y: 15 },
-    { x: 4, y: 20 },
-    { x: 5, y: 25 },
-  ];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('../data.json')
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+  
   return (
     <div className="dashboard">
       <h1>Carnegie Mellon Racing</h1>
@@ -29,6 +32,12 @@ const App = () => {
         <LapList />
         <TrackMap />
         <ControlHeatmap />
+      </div>
+
+      {/* Steering Wheel Section */}
+      <div className="steering-wheel-section">
+        <h3>Steering Wheel</h3>
+        <SteeringWheel data={data} />
       </div>
     </div>
   );

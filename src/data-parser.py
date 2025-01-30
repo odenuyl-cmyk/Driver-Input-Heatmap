@@ -5,8 +5,8 @@ import mdfreader
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"input file path"
-sample_csv = r"csv file path"
+sample_logfile = r"C:\Users\saish\driver-input-heatmap\logfile2024-12-14_13-19-07.mdf"
+sample_csv = r"C:\Users\saish\driver-input-heatmap\logfile2024-12-14_13-19-07.csv"
 
 #mdf = MDF(sample_logfile)
 # print("Available Channels:")
@@ -47,7 +47,7 @@ def csv_to_json(csv_file, json_file):
     df = pd.read_csv(csv_file)
     df.to_json(json_file, orient="records", indent=4)
 
-csv_to_json("/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile2024-12-14_13-19-07.csv", "/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/data.json")
+csv_to_json(sample_csv, r"C:\Users\saish\driver-input-heatmap\data.json")
 
 def convert_mdf_to_json(input_file, output_file, selected_signals):
     # load the MDF file
@@ -66,38 +66,11 @@ def convert_mdf_to_json(input_file, output_file, selected_signals):
             "values": signal_data.samples.tolist()
         }
 
-        # retrieve all occurrences of the signal (group and index)
-        #occurrences = mdf.get(signal_name, group=None, index=None)
-        
-        #if occurrences:  # if there are multiple occurrences
-        #    for group, index in occurrences:
-        #        # retrieve signal data for the specific group/index
-        #        signal_data = mdf.get(signal_name, group=group, index=index)
-        #        # because format looks like this: "FSM_brakePressureFront_group41_index3"
-        #        data_dict[f"{signal_name}_group{group}_index{index}"] = {
-        #            "timestamps": signal_data.timestamps.tolist(),
-        #            "values": signal_data.samples.tolist()
-        #        }
-        #else:
-        #    # If only one occurrence exists, just get it
-        #    signal_data = mdf.get(signal_name)
-        #    data_dict[signal_name] = {
-        #        "timestamps": signal_data.timestamps.tolist(),
-        #        "values": signal_data.samples.tolist()
-        #    }
-
     # Write the dictionary to a JSON file
     with open(output_file, 'w') as json_file:
         json.dump(data_dict, json_file, indent=4)
 
 
 sample_output = r"C:\Users\saish\driver-input-heatmap\data.json"
-
-# Define the signals you want to extract
-
-
-#convert_mdf_to_json(sample_logfile, sample_output, selected_signals)
-# this code is a little fucky 
-# convert_mdf_to_json(sample_logfile, sample_output)
 
 

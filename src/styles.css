@@ -78,4 +78,16 @@ canvas {
   border: 1px solid black;
 }
 
+.steering-wheel-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
 
+.steering-wheel {
+  width: 100px;
+  height: 100px;
+  transition: transform 0.2s ease-in-out;
+}
