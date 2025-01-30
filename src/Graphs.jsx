@@ -6,14 +6,16 @@ ChartJS.register(Title, Tooltip, Legend, PointElement, LineElement, CategoryScal
 
 const Graph = ({ coordinates }) => {
   const data = {
-    labels: coordinates.map((point, index) => index + 1),  // x-axis labels
+    labels: coordinates.map((point, index) => index),  // x-axis labels
     datasets: [
       {
-        label: 'Graph Data',
+        label: 'Brake',
         data: coordinates.map(point => point.y), // y-axis values
         borderColor: 'black',
+        borderWidth: '0.2',
         fill: false,
         tension: 0.1,
+        pointRadius: 0
       },
     ],
   };

@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import LapList from './LapList.jsx';
 import ControlHeatmap from './ControlHeatmap.jsx';
-import CanvasTest from './Canvas.jsx';
+import CanvasTest from './RaceLine.jsx';
 import Spline from './TrackMap.jsx';
 import TrackMap from './TrackMap.jsx';
 import Graph from './Graphs.jsx';
@@ -20,15 +20,15 @@ const App = () => {
   return (
     <div className="dashboard">
       <h1>Carnegie Mellon Racing</h1>
-      <h2>Driver-input Heatmap</h2>
+      <h2>Driver-Input Heatmap</h2>
       <div className="dashboard-sections">
         {/* split up for each section in the dashboard */}
         {/*<LapList />
         <ControlHeatmap />
         <TrackMap />*/}
         <LapList />
-        <ControlHeatmap />
         <TrackMap />
+        <ControlHeatmap />
       </div>
     </div>
   );

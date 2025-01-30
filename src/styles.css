@@ -2,7 +2,11 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #a32121;
+  background-color: #000000;
+}
+
+h1, h2, ul {
+  color: white;
 }
 
 div.dashboard {
@@ -19,7 +23,7 @@ div.dashboard {
 
 .track-map {
   flex: 2;
-  background: #c86b6b;
+  background: #950707;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
@@ -35,7 +39,7 @@ div.dashboard {
 }
 
 .lap-list, .control-heatmap {
-  background: #c86b6b;
+  background: #950707;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
@@ -55,7 +59,7 @@ div.dashboard {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #c86b6b;
+  background: #950707;;
   border: 1px dashed #ccc;
   border-radius: 8px;
 }
@@ -64,7 +68,7 @@ div.dashboard {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #c86b6b;
+  background: white;
   border: 1px dashed #ccc;
   border-radius: 8px;
 }
@@ -73,3 +77,5 @@ canvas {
   display: block;
   border: 1px solid black;
 }
+
+

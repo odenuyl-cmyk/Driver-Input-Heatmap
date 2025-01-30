@@ -1,19 +1,5 @@
 [
-    {
-        "VSM_brakePressureRear":"PSI",
-        "t_1":"s",
-        "RL_Calibrated_Output":"N",
-        "HVI_Current":"A",
-        "HVI_Voltage":"V",
-        "HVI_Power":"kW",
-        "FSM_throttlePos":null,
-        "FSM_brakePressureFront":"PSI",
-        "FSM_steeringWheelAngle":"deg",
-        "AMK_FR_ActualVelocity":"rpm",
-        "AMK_FL_ActualVelocity":"rpm",
-        "AMK_BR_ActualVelocity":"rpm",
-        "AMK_BL_ActualVelocity":"rpm"
-    },
+    
     {
         "VSM_brakePressureRear":"11.0",
         "t_1":"0.30222000000000004",

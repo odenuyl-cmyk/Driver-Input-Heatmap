@@ -1,12 +1,12 @@
 import React from 'react';
-import CanvasTest from './Canvas';
+import RaceLine from './RaceLine';
 
 const TrackMap = () => {
   return (
     <div className="track-map">
       <h2>Track Map</h2>
       <div className="map">
-      <CanvasTest />
+      <RaceLine />
       </div>
     </div>
   );
