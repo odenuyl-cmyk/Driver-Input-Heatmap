@@ -6,7 +6,7 @@ import SwanglePlot from './SwanglePlot.jsx';
 import Graph from './Graphs.jsx';
 import './styles.css';
 
-const App = () => {
+const LapTracker = () => {
   const [data, setData] = useState([]);
   const [laps, setLaps] = useState([]);
   const [currentLap, setCurrentLap] = useState(null);
@@ -57,4 +57,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default LapTracker;

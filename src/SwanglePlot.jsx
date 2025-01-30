@@ -16,7 +16,7 @@ const SwanglePlot = () => {
         // Transform the data into a coordinate array
         const coordArray = data.map(item => ({
           x: item.t_1,
-          y: item.FSM_steeringWheelAngle
+          y: item.FSM_steeringWheelAngle / 1000
         }));
         setCoordinates(coordArray);
       })

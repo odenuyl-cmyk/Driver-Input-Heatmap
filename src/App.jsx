@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import LapList from './LapList.jsx';
 import ControlHeatmap from './ControlHeatmap.jsx';
@@ -8,6 +8,7 @@ import TrackMap from './TrackMap.jsx';
 import SteeringWheel from './SteeringWheel.jsx';
 import Graph from './Graphs.jsx';
 import { Line } from 'react-chartjs-2';
+import Header from './Header.jsx';
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale } from 'chart.js';
 
 const App = () => {
@@ -22,22 +23,17 @@ const App = () => {
   
   return (
     <div className="dashboard">
-      <h1>Carnegie Mellon Racing</h1>
-      <h2>Driver-Input Heatmap</h2>
+      <Header />
+      <h1>Driver-Input Heatmap</h1>
       <div className="dashboard-sections">
         {/* split up for each section in the dashboard */}
         {/*<LapList />
         <ControlHeatmap />
         <TrackMap />*/}
-        <LapList />
+        
         <TrackMap />
+        <LapList />
         <ControlHeatmap />
-      </div>
-
-      {/* Steering Wheel Section */}
-      <div className="steering-wheel-section">
-        <h3>Steering Wheel</h3>
-        <SteeringWheel data={data} />
       </div>
     </div>
   );

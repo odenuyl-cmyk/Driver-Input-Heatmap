@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import SteeringWheel from './SteeringWheel';
 
 
 {/* need to check how to get in actual laptimes from data files, rn just a dict type thing */}
 const LapList = () => { 
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('../data.json')
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
   const laps = [
     { id: 1, time: '1:30.123' },
     { id: 2, time: '1:29.876' },
@@ -18,6 +29,11 @@ const LapList = () => {
           <li key={lap.id}>Lap {lap.id}: {lap.time}</li>
         ))}
       </ul>
+      {/* Steering Wheel Section */}
+      <div className="steering-wheel-section">
+        <h3>Steering Wheel</h3>
+        <SteeringWheel data={data} />
+      </div>
     </div>
   );
 };

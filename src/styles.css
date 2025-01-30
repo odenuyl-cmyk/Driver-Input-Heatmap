@@ -73,6 +73,37 @@ div.dashboard {
   border-radius: 8px;
 }
 
+.dropdown {
+  appearance: none;
+  position: absolute;
+  top: 200px;
+  right: 1300px;
+  padding: 0px;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  background-color: #950707;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  width: 170px;
+}
+
+.option {
+  appearance: none;
+  position: absolute;
+  top: -24px;
+  right: 0px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  background-color: #950707;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  width: 170px;
+  max-height: 200px; /* Limit the height of the dropdown */
+  overflow-y: auto;  /* Make it scrollable if content exceeds max height */
+}
+
 canvas {
   display: block;
   border: 1px solid black;
@@ -84,10 +115,12 @@ canvas {
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
+  color: white;
 }
 
 .steering-wheel {
-  width: 100px;
+  width: 170px;
   height: 100px;
   transition: transform 0.2s ease-in-out;
+  color: white;
 }
