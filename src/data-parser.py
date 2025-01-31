@@ -1,12 +1,14 @@
 from asammdf import MDF, set_global_option
 import json
 import mdfreader
+import pandas as pd
 
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"C:\Users\saish\driver-input-heatmap\logfile2024-12-14_13-19-07.mdf"
-sample_csv = r"C:\Users\saish\driver-input-heatmap\logfile2024-12-14_13-19-07.csv"
+sample_logfile = r"mdf file path"
+sample_csv = r"csv file path"
+sample_json = r"json file path"
 
 #mdf = MDF(sample_logfile)
 # print("Available Channels:")
@@ -41,36 +43,13 @@ selected_signals = [
 #yop = mdfreader.Mdf(sample_logfile, channel_list=selected_signals, convert_after_read=False)
 #yop.export_to_csv(sampling=0.01)
 
-import pandas as pd
+yop = mdfreader.Mdf("mdf file name", channel_list=selected_signals, convert_after_read=False)
+yop.export_to_csv(sampling=0.01)
 
 def csv_to_json(csv_file, json_file):
     df = pd.read_csv(csv_file)
     df.to_json(json_file, orient="records", indent=4)
 
-csv_to_json(sample_csv, r"C:\Users\saish\driver-input-heatmap\data.json")
-
-def convert_mdf_to_json(input_file, output_file, selected_signals):
-    # load the MDF file
-    mdf = MDF(input_file)
-    
-    # dictionary to store selected signal data
-    data_dict = {}
-
-    for signal_name in selected_signals:
-
-        signal_data = mdf.get(signal_name)
-
-        signal_data = mdf.get(signal_name)
-        data_dict[signal_name] = {
-            "timestamps": signal_data.timestamps.tolist(),
-            "values": signal_data.samples.tolist()
-        }
-
-    # Write the dictionary to a JSON file
-    with open(output_file, 'w') as json_file:
-        json.dump(data_dict, json_file, indent=4)
-
-
-sample_output = r"C:\Users\saish\driver-input-heatmap\data.json"
+csv_to_json(sample_csv, sample_json)
 
 
