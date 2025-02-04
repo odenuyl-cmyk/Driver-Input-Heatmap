@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SteeringWheel from './SteeringWheel';
+import './global.css';
 
 
 {/* need to check how to get in actual laptimes from data files, rn just a dict type thing */}

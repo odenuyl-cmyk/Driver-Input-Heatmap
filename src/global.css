@@ -1,5 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+  --cmr-red: #af1328;
+  --cmr-black: #231f20;
+  --btg-light-grey: #dddddd;
+  --btg-red: #eb5958;
+  --btg-green: #2cbe3a;
+  --btg-yellow: #ffc700;
+}
+@supports (font-variation-settings: normal) {
+  :root { font-family: InterVariable, sans-serif; }
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: Inter, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #000000;
@@ -7,7 +25,7 @@ body {
 
 h1, h2, ul {
   color: white;
-}
+} */
 
 div.dashboard {
   padding: 20px;
@@ -16,8 +34,8 @@ div.dashboard {
 
 .dashboard-sections {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  /* justify-content: space-between;
+  align-items: flex-start; */
   margin-top: 20px;
 }
 
@@ -109,6 +127,8 @@ canvas {
   border: 1px solid black;
 }
 
+/* ------------------ STEERING WHEEL ANGLE ---------------*/
+
 .steering-wheel-section {
   display: flex;
   justify-content: center;
@@ -123,4 +143,52 @@ canvas {
   height: 100px;
   transition: transform 0.2s ease-in-out;
   color: white;
+}
+
+/* ------------------ APP ---------------*/
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* ------------------ CANVAS FOR TRACKMAP ---------------*/
+
+canvas {
+  display: block;
+  border: 1px solid black;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

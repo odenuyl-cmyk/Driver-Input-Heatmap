@@ -4,7 +4,7 @@ import ControlHeatmap from './ControlHeatmap.jsx';
 import TrackMap from './TrackMap.jsx';
 import SwanglePlot from './SwanglePlot.jsx';
 import Graph from './Graphs.jsx';
-import './styles.css';
+import './global.css';
 
 const LapTracker = () => {
   const [data, setData] = useState([]);

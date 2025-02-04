@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
+import './global.css';
 import LapList from './LapList.jsx';
 import ControlHeatmap from './ControlHeatmap.jsx';
 import CanvasTest from './RaceLine.jsx';
@@ -23,7 +23,7 @@ const App = () => {
   
   return (
     <div className="dashboard">
-      <Header />
+      <Header/>
       <h1>Driver-Input Heatmap</h1>
       <div className="dashboard-sections">
         {/* split up for each section in the dashboard */}
