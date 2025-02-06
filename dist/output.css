@@ -589,7 +589,7 @@ div.dashboard {
   gap: 20px;
 }
 
-.lap-list, .control-heatmap {
+.lap-list, .data-graphs {
   background: #950707;
   border: 1px solid #ddd;
   border-radius: 8px;

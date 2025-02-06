@@ -24,13 +24,14 @@ const LapList = () => {
 
   return (
     <div className="lap-list">
-      <h3>Lap Times</h3>
+      <h2>Lap Times</h2>
       <ul>
         {laps.map((lap) => (
           <li key={lap.id}>Lap {lap.id}: {lap.time}</li>
         ))}
       </ul>
-      {/* Steering Wheel Section */}
+
+      {/* Steering Wheel */}
       <div className="steering-wheel-section">
         <h3>Steering Wheel</h3>
         <SteeringWheel data={data} />
