@@ -66,13 +66,12 @@ body {
   font-size: 18px;
   padding: 20px;
   justify-content: center;
-  /* font-weight: bold; */
 }
 
 .nav-buttons {
   display: flex;
   gap: 10px;
-  margin-left: auto; /* Ensures buttons stay on the right */
+  margin-left: auto;
 }
 
 .header-btn {
@@ -83,7 +82,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  min-width: 80px; /* Ensures consistent button size */
+  min-width: 80px;
   text-align: center;
 }
 
@@ -92,12 +91,13 @@ body {
   color: var(--cmr-black);
 }
 
-/* Prevent content from being hidden behind the fixed header */
+/* this prevents content from being hidden behind the fixed header */
 .full-dashboard {
   padding-top: 60px;
 }
 
 /* ------------- MAIN PAGE TOP DASHBOARD (TRACK-MAP, DATA GRAPHS ------------*/
+/* TODO: FINISH SEPARING TOP & BOTTOM DASHBOARDS */
 
 .homepage-dashboard {
   display: flex;
@@ -203,6 +203,3 @@ canvas {
   border-radius: 5px;
   /* border: 1px solid black; */
 }
-
-/* ------------------ STEERING WHEEL ANGLE ---------------*/
-
