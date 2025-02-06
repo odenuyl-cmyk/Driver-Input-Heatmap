@@ -33,7 +33,7 @@ const LapList = () => {
 
       {/* Steering Wheel */}
       <div className="steering-wheel-section">
-        <h3>Steering Wheel</h3>
+        {/* <h3>Steering Wheel</h3> */}
         <SteeringWheel data={data} />
       </div>
     </div>
