@@ -24,7 +24,7 @@ const LapList = () => {
 
   return (
     <div className="lap-list">
-      <h2>Lap Times</h2>
+      <h3>Lap Times</h3>
       <ul>
         {laps.map((lap) => (
           <li key={lap.id}>Lap {lap.id}: {lap.time}</li>

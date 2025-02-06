@@ -14,10 +14,7 @@ function LapDropdown({ options, onSelect }) {
     <div className = "dropdown">
     <div className="absolute text-left">
       {/* Button */}
-      <button
-        className="px-6 py-3 option"
-        onClick={() => setIsOpen(!isOpen)}
-      >
+      <button className="px-6 py-3 option" onClick={() => setIsOpen(!isOpen)}>
         {selected} ▼
       </button>
 

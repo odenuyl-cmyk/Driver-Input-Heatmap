@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -561,7 +565,7 @@ div.dashboard {
   text-align: center;
 }
 
-.dashboard-sections {
+.homepage-dashboard {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;

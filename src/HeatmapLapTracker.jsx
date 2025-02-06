@@ -39,10 +39,10 @@ const LapTracker = () => {
   };
 
   return (
-    <div className="dashboard">
+    <div className="full-dashboard">
       <h1>Carnegie Mellon Racing</h1>
-      <h2>Driver-Input Heatmap</h2>
-      <div className="dashboard-sections">
+      <h3>Driver-Input Heatmap</h3>
+      <div className="homepage-dashboard">
         <LapList laps={laps} onLapSelect={handleLapSelect} />
         <TrackMap />
         <ControlHeatmap data={data} currentLap={currentLap} />

@@ -12,7 +12,7 @@ const SteeringWheel = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="steering-wheel-section">
+    <div className="steering-wheel-section justify-center">
       <img
         src="/steering-wheel-graphic.png" // img
 

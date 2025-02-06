@@ -9,7 +9,7 @@ const ControlHeatmap = () => {
 
   return (
     <div className="control-heatmap">
-      <h2>Data Graphs</h2>
+      <h3>Data Graphs</h3>
       <div className="heatmap">
         <BrakePlot />
       </div>
