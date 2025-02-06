@@ -25,10 +25,14 @@ const App = () => {
   return (
     <div className="full-dashboard">
       <Header/>
-      <div className="homepage-dashboard">
-        <TrackMap />
-        <ControlHeatmap />
-        <LapList />
+      {/* <h1>Driver-Input Heatmap</h1> */}
+      <div className="homepage-dashboard-top">
+        <TrackMap/>
+        <ControlHeatmap/>
+      </div>
+      
+      <div className="homepage-dashboard-bot">
+        <LapList/>
       </div>
     </div>
   );

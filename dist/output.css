@@ -565,7 +565,7 @@ div.dashboard {
   text-align: center;
 }
 
-.homepage-dashboard {
+.homepage-dashboard-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;

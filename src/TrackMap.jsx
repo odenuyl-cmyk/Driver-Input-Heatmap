@@ -1,6 +1,6 @@
 import React from 'react';
 import RaceLine from './RaceLine';
-import './global.css';
+// import './global.css';
 import LapDropdown from './LapCompare';
 
 const TrackMap = () => {

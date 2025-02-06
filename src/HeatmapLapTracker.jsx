@@ -4,7 +4,6 @@ import ControlHeatmap from './ControlHeatmap.jsx';
 import TrackMap from './TrackMap.jsx';
 import SwanglePlot from './SwanglePlot.jsx';
 import Graph from './Graphs.jsx';
-import './global.css';
 
 const LapTracker = () => {
   const [data, setData] = useState([]);
@@ -42,7 +41,7 @@ const LapTracker = () => {
     <div className="full-dashboard">
       <h1>Carnegie Mellon Racing</h1>
       <h3>Driver-Input Heatmap</h3>
-      <div className="homepage-dashboard">
+      <div className="homepage-dashboard-top">
         <LapList laps={laps} onLapSelect={handleLapSelect} />
         <TrackMap />
         <ControlHeatmap data={data} currentLap={currentLap} />

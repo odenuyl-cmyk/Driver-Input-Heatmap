@@ -3,9 +3,25 @@ import React, { useRef, useEffect, useState } from 'react';
 const RaceLine = () => {
   const canvasRef = useRef(null);
   const [points, setCoordinates] = useState([]);
+  
+  // Automatically track container size
+  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
-  const CANVAS_WIDTH = 800;
-  const CANVAS_HEIGHT = 450;
+  useEffect(() => {
+    const updateCanvasSize = () => {
+      if (canvasRef.current?.parentElement) {
+        setCanvasSize({
+          width: canvasRef.current.parentElement.clientWidth,
+          height: canvasRef.current.parentElement.clientHeight,
+        });
+      }
+    };
+
+    updateCanvasSize(); // Initial size
+    window.addEventListener("resize", updateCanvasSize);
+    
+    return () => window.removeEventListener("resize", updateCanvasSize);
+  }, []);
 
   // Fetch JSON Data
   useEffect(() => {
@@ -21,16 +37,14 @@ const RaceLine = () => {
       .catch(error => console.error('Error fetching the data:', error));
   }, []);
 
-  // Draw on Canvas when `points` is updated
+  // Draw on Canvas when `points` or `canvasSize` updates
   useEffect(() => {
-    if (points.length === 0) return;
+    if (points.length === 0 || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
-    if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
-    canvas.width = CANVAS_WIDTH+30;
-    canvas.height = CANVAS_HEIGHT+30;
+    canvas.width = canvasSize.width;
+    canvas.height = canvasSize.height;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -42,29 +56,27 @@ const RaceLine = () => {
 
     // Normalize and Scale Points
     const scaledPoints = points.map(p => ({
-      x: ((p.x - xMin) / (xMax - xMin)) * CANVAS_WIDTH + 15,
-      y: CANVAS_HEIGHT - ((p.y - yMin) / (yMax - yMin)) * CANVAS_HEIGHT + 15 // Invert y-axis
+      x: ((p.x - xMin) / (xMax - xMin)) * canvasSize.width,
+      y: canvasSize.height - ((p.y - yMin) / (yMax - yMin)) * canvasSize.height // Invert y-axis
     }));
 
     // Draw spline
     ctx.beginPath();
     ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
-
     for (let i = 1; i < scaledPoints.length - 1; i++) {
       const midX = (scaledPoints[i].x + scaledPoints[i + 1].x) / 2;
       const midY = (scaledPoints[i].y + scaledPoints[i + 1].y) / 2;
       ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].y, midX, midY);
     }
-
     ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].y);
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 10;
     ctx.stroke();
 
-  }, [points]); // Re-run when `points` updates
+  }, [points, canvasSize]);
 
   return (
-    <canvas ref={canvasRef} style={{ backgroundColor: 'white', display: 'flex' }} />
+    <canvas ref={canvasRef} style={{ width: "100%", height: "100%" }} />
   );
 };
 

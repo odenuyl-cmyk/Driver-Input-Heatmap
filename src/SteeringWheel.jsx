@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './global.css';
 
 const SteeringWheel = ({ data }) => {
   const [angle, setAngle] = useState(0);
