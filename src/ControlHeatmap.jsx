@@ -8,7 +8,7 @@ import SwanglePlot from './SwanglePlot';
 const ControlHeatmap = () => {
 
   return (
-    <div className="control-heatmap">
+    <div className="data-graphs">
       <h2>Data Graphs</h2>
       <div className="heatmap">
         <BrakePlot />

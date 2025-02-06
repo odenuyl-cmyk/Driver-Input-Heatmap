@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
+import './global.css';
 
 const SteeringWheel = ({ data }) => {
   const [angle, setAngle] = useState(0);
@@ -12,13 +12,15 @@ const SteeringWheel = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="steering-wheel-section">
+    <div className="steering-wheel-section justify-center">
       <img
-        src="/steering-wheel-graphic.png" // img
-
+        src="/steering-wheel-graphic.png"
         className="steering-wheel"
         style={{ transform: `rotate(${angle}deg)` }}
       />
+
+      {/* TODO: needs to add to this so that it takes in real time data */}
+      <div classname="steering-wheel-angle-display">Angle Display Placeholder</div>
     </div>
   );
 };

@@ -10,10 +10,9 @@ const SwanglePlot = () => {
 
   useEffect(() => {
     // Fetch the JSON data (local or API)
-    fetch('../data.json') // Replace with the correct path to your JSON
+    fetch('../data.json') // replace with imported json file
       .then(response => response.json())
       .then(data => {
-        // Transform the data into a coordinate array
         const coordArray = data.map(item => ({
           x: item.t_1,
           y: item.FSM_steeringWheelAngle / 1000
@@ -24,12 +23,12 @@ const SwanglePlot = () => {
   }, []);
 
   const data = {
-    labels: coordinates.map((point, index) => index),  // x-axis labels
+    labels: coordinates.map((point, index) => index), 
     datasets: [
       {
         label: 'SW Angle',
         data: coordinates.map(point => point.y), // y-axis values
-        borderColor: 'black',
+        borderColor: '#AF1328',
         borderWidth: '0.2',
         fill: false,
         tension: 0.1,
@@ -41,9 +40,34 @@ const SwanglePlot = () => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    scales: {
+      x: {
+        ticks: {
+          color: 'white',
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.2)',
+        },
+      },
+      y: {
+        ticks: {
+          color: 'white',
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.2)',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white',
+        },
+      },
+    },
   };
 
-  return <Line data={data} />;
+  return <Line data={data} options={options} />;
 };
 
 export default SwanglePlot;

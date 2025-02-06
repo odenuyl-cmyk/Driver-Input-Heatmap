@@ -64,7 +64,7 @@ const RaceLine = () => {
   }, [points]); // Re-run when `points` updates
 
   return (
-    <canvas ref={canvasRef} style={{ border: '1px solid black', backgroundColor: 'white', display: 'block' }} />
+    <canvas ref={canvasRef} style={{ backgroundColor: 'white', display: 'flex' }} />
   );
 };
 

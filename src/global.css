@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ------------------ GENERAL STYLING ---------------*/
+:root {
+  font-family: "Poppins", sans-serif; /* Set default font */
+  --cmr-red: #AF1328;
+  --cmr-black: #231f20;
+  --module-grey: #373333;
+  --text-white: #ffffff;
+}
+
+body {
+  font-family: "Poppins", sans-serif; /* Ensure body text uses Poppins */
+  margin: 0;
+  padding: 0;
+  background-color: var(--cmr-black);
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-white);
+}
+
+.full-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ------------------ HEADER STYLING ---------------*/
+
+.header-container {
+  position: fixed; /* makes the header stay at the TOPPP */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--cmr-red);
+  color: var(--text-white);
+  height: 50px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 20px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 18px;
+  padding: 20px;
+  justify-content: center;
+  /* font-weight: bold; */
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto; /* Ensures buttons stay on the right */
+}
+
+.header-btn {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 80px; /* Ensures consistent button size */
+  text-align: center;
+}
+
+.header-btn:hover {
+  background: white;
+  color: var(--cmr-black);
+}
+
+/* Prevent content from being hidden behind the fixed header */
+.full-dashboard {
+  padding-top: 60px;
+}
+
+/* ------------- MAIN PAGE TOP DASHBOARD (TRACK-MAP, DATA GRAPHS ------------*/
+
+.homepage-dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px; 
+  /* max-width: 1200px; */
+  margin: auto;
+}
+
+.track-map {
+  flex: 4;
+  width: 1500px;
+  background: var(--module-grey);
+  border: 1px solid var(--cmr-red);
+  border-radius: 8px;
+  padding: 20px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  text-align: left;
+}
+
+.data-graphs {
+  flex: 1;
+  background: var(--module-grey);
+  border: 1px solid var(--cmr-red);
+  border-radius: 8px;
+}
+
+/* these are adjust for better spacing & customization :) */
+.track-map {
+  background: var(--module-grey);
+  border-radius: 8px;
+  width: 1000px;
+}
+
+/* .RaceLine {
+} */
+
+.data-graphs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--module-grey);
+  color: var(--text-white);
+  padding: 20px;
+}
+
+.heatmap {
+  height: 150px;
+  flex-direction: column;
+  color: var(--text-white);
+  border-radius: 5px;
+}
+
+.lap-list {
+  flex: 1;
+  width: 100px;
+  background: var(--module-grey);
+  border: 1px solid var(--cmr-red);
+  border-radius: 8px;
+  justify-content: left;
+  padding: 20px;
+}
+
+.steering-wheel-section {
+  justify-content: center;
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+  gap: 20px;
+  color: white;
+}
+
+.steering-wheel {
+  width: 170px;
+  height: 100px;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.steering-wheel-angle-display {
+  margin-top: 20px;
+}
+
+/* ------------------ LAPS DROPDOWN MENU ---------------*/
+
+.dropdown {
+  appearance: none;
+  padding: 5px;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  background-color: var(--cmr-red);
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  width: 170px;
+}
+
+canvas {
+  display: flex;
+  border-radius: 5px;
+  /* border: 1px solid black; */
+}
+
+/* ------------------ STEERING WHEEL ANGLE ---------------*/
+

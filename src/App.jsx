@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
+import './global.css';
 import LapList from './LapList.jsx';
 import ControlHeatmap from './ControlHeatmap.jsx';
 import CanvasTest from './RaceLine.jsx';
@@ -14,6 +14,7 @@ import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, L
 const App = () => {
   const [data, setData] = useState([]);
 
+  // this fetches the data from the json file that we uploaded
   useEffect(() => {
     fetch('../data.json')
       .then((response) => response.json())
@@ -22,18 +23,12 @@ const App = () => {
   }, []);
   
   return (
-    <div className="dashboard">
-      <Header />
-      <h1>Driver-Input Heatmap</h1>
-      <div className="dashboard-sections">
-        {/* split up for each section in the dashboard */}
-        {/*<LapList />
-        <ControlHeatmap />
-        <TrackMap />*/}
-        
+    <div className="full-dashboard">
+      <Header/>
+      <div className="homepage-dashboard">
         <TrackMap />
-        <LapList />
         <ControlHeatmap />
+        <LapList />
       </div>
     </div>
   );

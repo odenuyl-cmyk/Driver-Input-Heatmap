@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SteeringWheel from './SteeringWheel';
+import './global.css';
 
 
 {/* need to check how to get in actual laptimes from data files, rn just a dict type thing */}
@@ -29,7 +30,8 @@ const LapList = () => {
           <li key={lap.id}>Lap {lap.id}: {lap.time}</li>
         ))}
       </ul>
-      {/* Steering Wheel Section */}
+
+      {/* Steering Wheel */}
       <div className="steering-wheel-section">
         <h3>Steering Wheel</h3>
         <SteeringWheel data={data} />

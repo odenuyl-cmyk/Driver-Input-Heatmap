@@ -1,32 +1,19 @@
-// Header.js
 import React from 'react';
 
 const Header = () => {
   return (
-    <header style={styles.header}>
-      <h1>Carnegie Mellon Racing</h1>
-      <nav>
+    <header className="header-container">
+      <div className="logo-container">
+        <img src="/CMRLogoWhite.png" alt="CMR Logo" className="logo" />
+        <span className="title">DRIVER INPUT HEATMAP</span>
+      </div>
+
+      <nav className="nav-buttons">
+        <button className="header-btn">Import</button>
+        <button className="header-btn">Export</button>
       </nav>
     </header>
   );
-};
-
-const styles = {
-  header: {
-    backgroundColor: '#950707',
-    color: '#fff',
-    padding: '10px 0',
-    textAlign: 'center',
-  },
-  navList: {
-    listStyleType: 'none',
-    padding: 0,
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  navItem: {
-    margin: '0 15px',
-  },
 };
 
 export default Header;
