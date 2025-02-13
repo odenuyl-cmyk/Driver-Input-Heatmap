@@ -153,24 +153,33 @@ canvas {
   display: block;
 }
 
-.cone-counter{
+.cone-display{
+  /* font-weight:bold;
+  text-align:center; */
+  font-size: 50px;
   
+} 
+
+.cone-counter{
   display:flex;
   flex-direction: row;
+  gap: 20px;
  
   position: absolute;
-  top: 30px;
+  top: 15px;
   right: 10px;
   /* background: var(--cmr-red); */
   color: var(--text-white);
-  
-  border-radius: 5px;
   font-size: 14px;
 }
 
 .cone-button{
   background-color: var(--Lebron);
+  width: 50;
+  height: 50;
+  border-radius: 8px;
 }
+
 
 /*>>>>>>>>>>>>>>>>>>> DATA GRAPHS STYLING <<<<<<<<<<<<<<<<*/
 
