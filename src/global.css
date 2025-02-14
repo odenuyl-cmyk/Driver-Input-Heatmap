@@ -11,8 +11,9 @@
   font-family: "Poppins", sans-serif; /* sets as default font */
   --cmr-red: #AF1328;
   --cmr-black: #231f20;
-  --module-grey: #373333;
+  --module-grey: #373333; 
   --text-white: #ffffff;
+  --Lebron: #AF2306;
 }
 
 body {
@@ -152,16 +153,33 @@ canvas {
   display: block;
 }
 
-.cone-counter {
+.cone-display{
+  /* font-weight:bold;
+  text-align:center; */
+  font-size: 50px;
+  
+} 
+
+.cone-counter{
+  display:flex;
+  flex-direction: row;
+  gap: 20px;
+ 
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 10px;
   /* background: var(--cmr-red); */
   color: var(--text-white);
-  padding: 5px 10px;
-  border-radius: 5px;
   font-size: 14px;
 }
+
+.cone-button{
+  background-color: var(--Lebron);
+  width: 50;
+  height: 50;
+  border-radius: 8px;
+}
+
 
 /*>>>>>>>>>>>>>>>>>>> DATA GRAPHS STYLING <<<<<<<<<<<<<<<<*/
 
