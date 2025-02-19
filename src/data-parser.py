@@ -6,9 +6,9 @@ import pandas as pd
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"mdf file path"
-sample_csv = r"csv file path"
-sample_json = r"json file path"
+sample_logfile = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile2024-12-14_13-19-07.mdf"
+sample_csv = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile2024-12-14_13-19-07.csv"
+sample_json = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/data.json"
 
 #mdf = MDF(sample_logfile)
 # print("Available Channels:")
@@ -40,10 +40,10 @@ selected_signals = [
 
 # Function to convert MDF file to JSON with selected channels
 
-#yop = mdfreader.Mdf(sample_logfile, channel_list=selected_signals, convert_after_read=False)
-#yop.export_to_csv(sampling=0.01)
+yop = mdfreader.Mdf(sample_logfile, channel_list=selected_signals, convert_after_read=False)
+yop.export_to_csv(sampling=0.01)
 
-yop = mdfreader.Mdf("mdf file name", channel_list=selected_signals, convert_after_read=False)
+yop = mdfreader.Mdf(sample_logfile, channel_list=selected_signals, convert_after_read=False)
 yop.export_to_csv(sampling=0.01)
 
 def csv_to_json(csv_file, json_file):
