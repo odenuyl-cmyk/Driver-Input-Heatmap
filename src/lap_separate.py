@@ -1,6 +1,6 @@
 import json
 
-with open(r'C:\Users\saish\driver-input-heatmap\data.json', 'r') as file:
+with open(r'/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/data.json', 'r') as file:
     json_data = json.load(file) 
 
 laps = []
@@ -28,7 +28,7 @@ for entry in json_data:
 
         # extract relevant lap statistics
         brake_pressures = [float(e["FSM_brakePressureFront"]) for e in current_lap]
-        throttle_positions = [float(e["FSM_throttlePos"]) for e in current_lap]
+        #throttle_positions = [float(e["FSM_throttlePos"]) for e in current_lap]
         steering_angles = [float(e["FSM_steeringWheelAngle"]) for e in current_lap]
 
 
@@ -40,9 +40,9 @@ for entry in json_data:
             "Max Brake Pressure": max(brake_pressures),
             "Min Brake Pressure": min(brake_pressures),
             "Average Brake Pressure": sum(brake_pressures) / len(brake_pressures),
-            "Max Throttle": max(throttle_positions),
-            "Min Throttle": min(throttle_positions),
-            "Average Throttle": sum(throttle_positions) / len(throttle_positions),
+            #"Max Throttle": max(throttle_positions),
+            #"Min Throttle": min(throttle_positions),
+            #"Average Throttle": sum(throttle_positions) / len(throttle_positions),
             "Max Steering Angle": max(steering_angles),
             "Min Steering Angle": min(steering_angles),
             "Average Steering Angle": sum(steering_angles) / len(steering_angles)

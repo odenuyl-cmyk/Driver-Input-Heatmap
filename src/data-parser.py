@@ -6,9 +6,9 @@ import pandas as pd
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"C:\Users\saish\driver-input-heatmap\logfile2024-11-03_13-54-49.mdf"
-sample_csv = r"C:\Users\saish\driver-input-heatmap\logfile2024-11-03_13-54-49.csv"
-sample_json = r"C:\Users\saish\driver-input-heatmap\data.json"
+sample_logfile = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile_2024-09-28_11-50-57.mdf"
+sample_csv = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile_2024-09-28_11-50-57.csv"
+sample_json = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/data.json"
 
 #mdf = MDF(sample_logfile)
 # print("Available Channels:")
@@ -27,11 +27,12 @@ selected_signals = [
     "AMK_BR_ActualVelocity",   # Back-right wheel actual velocity
     "SBG_Accel_X",             # X-acceleration
     "SBG_Accel_Y",             # Y-acceleration
+    "SBG_Body_Vel"
     "FSM_throttlePos",         # throttle position
     "FR_Calibrated_Output",    # load cell
     "RL_Calibrated_Output",    # load cell
-    "SBG_Latitude_Acc",        # position
-    "SBG_Longitude_Acc",       # position
+    "SBG_Latitude",        # position
+    "SBG_Longitude",       # position
     "FSM_steeringWheelAngle",  # swangle
     "HVI_Voltage",             # Power: Voltage
     "HVI_Current",             # Power: Current

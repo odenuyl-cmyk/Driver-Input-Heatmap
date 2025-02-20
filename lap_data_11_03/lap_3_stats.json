@@ -1,0 +1,15 @@
+{
+    "Lap Number": 3,
+    "Start Time": "180.38669000000016",
+    "End Time": "202.48669000000018",
+    "Duration": 22.100000000000023,
+    "Max Brake Pressure": 38.0,
+    "Min Brake Pressure": 25.0,
+    "Average Brake Pressure": 25.901402080506557,
+    "Max Throttle": 136.0,
+    "Min Throttle": 0.0,
+    "Average Throttle": 64.74581637268204,
+    "Max Steering Angle": 48.0,
+    "Min Steering Angle": -16.0,
+    "Average Steering Angle": 34.86521935775667
+}

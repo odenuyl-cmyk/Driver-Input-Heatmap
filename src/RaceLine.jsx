@@ -25,12 +25,12 @@ const RaceLine = () => {
 
   // Fetch JSON Data
   useEffect(() => {
-    fetch('../spa_raceline.json')
+    fetch('../lap_12.json')
       .then(response => response.json())
       .then(data => {
         const coordArray = data.map(item => ({
-          x: item.x_m,
-          y: item.y_m
+          x: item.SBG_Longitude,
+          y: item.SBG_Latitude
         }));
         setCoordinates(coordArray);
       })
@@ -43,16 +43,16 @@ const RaceLine = () => {
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    canvas.width = canvasSize.width;
-    canvas.height = canvasSize.height;
+    canvas.width = parseFloat(canvasSize.width);
+    canvas.height = parseFloat(canvasSize.height);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Find min & max values for normalization
-    const xMin = Math.min(...points.map(p => p.x));
-    const xMax = Math.max(...points.map(p => p.x));
-    const yMin = Math.min(...points.map(p => p.y));
-    const yMax = Math.max(...points.map(p => p.y));
+    const xMin = parseFloat(Math.min(...points.map(p => p.x)));
+    const xMax = parseFloat(Math.max(...points.map(p => p.x)));
+    const yMin = parseFloat(Math.min(...points.map(p => p.y)));
+    const yMax = parseFloat(Math.max(...points.map(p => p.y)));
 
     // Normalize and Scale Points
     const scaledPoints = points.map(p => ({
