@@ -25,12 +25,12 @@ const RaceLine = () => {
 
   // Fetch JSON Data
   useEffect(() => {
-    fetch('../lap_12.json')
+    fetch('../lap_15.json')
       .then(response => response.json())
       .then(data => {
         const coordArray = data.map(item => ({
-          x: item.SBG_Longitude,
-          y: item.SBG_Latitude
+          x: parseFloat(item.SBG_Longitude),
+          y: parseFloat(item.SBG_Latitude)
         }));
         setCoordinates(coordArray);
       })
@@ -56,8 +56,8 @@ const RaceLine = () => {
 
     // Normalize and Scale Points
     const scaledPoints = points.map(p => ({
-      x: ((p.x - xMin) / (xMax - xMin)) * canvasSize.width,
-      y: canvasSize.height - ((p.y - yMin) / (yMax - yMin)) * canvasSize.height // Invert y-axis
+      x: ((p.x - xMin) / (xMax - xMin)) * parseFloat(canvas.width),
+      y: canvas.height - ((p.y - yMin) / (yMax - yMin)) * parseFloat(canvas.height) // Invert y-axis
     }));
 
     // Draw spline
@@ -67,6 +67,7 @@ const RaceLine = () => {
       const midX = (scaledPoints[i].x + scaledPoints[i + 1].x) / 2;
       const midY = (scaledPoints[i].y + scaledPoints[i + 1].y) / 2;
       ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].y, midX, midY);
+      //console.log('x: %f y: %f', points[i].x, points[i].y)
     }
     ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].y);
     ctx.strokeStyle = 'white';

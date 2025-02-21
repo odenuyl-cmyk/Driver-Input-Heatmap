@@ -6,8 +6,8 @@ import pandas as pd
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile_2024-09-28_11-50-57.mdf"
-sample_csv = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile_2024-09-28_11-50-57.csv"
+sample_logfile = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile_2024-09-28_12-51-17 (1).mdf"
+sample_csv = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile_2024-09-28_12-51-17 (1).csv"
 sample_json = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/data.json"
 
 #mdf = MDF(sample_logfile)
