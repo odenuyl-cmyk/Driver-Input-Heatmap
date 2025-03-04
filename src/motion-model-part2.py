@@ -6,10 +6,15 @@ import matplotlib.pyplot as plt
 
 # function to convert lat/lon to local meters
 def latlon_to_meters(lat, lon, ref_lat, ref_lon):
-    # found this genius math 
     R = 6371000  # earth radius in meters
 
-    # convert to radians
+    # ensure inputs are numpy arrays
+    lat = np.asarray(lat, dtype=np.float64)
+    lon = np.asarray(lon, dtype=np.float64)
+    ref_lat = np.asarray(ref_lat, dtype=np.float64)
+    ref_lon = np.asarray(ref_lon, dtype=np.float64)
+
+    # now it's safe to convert to radians
     lat, lon = np.radians(lat), np.radians(lon)
     ref_lat, ref_lon = np.radians(ref_lat), np.radians(ref_lon)
 
@@ -18,6 +23,8 @@ def latlon_to_meters(lat, lon, ref_lat, ref_lon):
     y = (lat - ref_lat) * R
 
     return x, y
+
+
 
 # kinematic bicycle model function
 def kinematic_bicycle_model(x0, y0, theta0, velocity, steering_angle, dt, L):
@@ -30,7 +37,7 @@ def kinematic_bicycle_model(x0, y0, theta0, velocity, steering_angle, dt, L):
     return x_next, y_next, theta_next
 
 # function to process raceline
-def process_raceline(lat, lon, velocity, steering_angle, dt=0.05, L=2.5):
+def process_raceline(lat, lon, velocity, steering_angle, dt=0.02, L=2.5):
 #taking points and moving them over 
     # convert lat/lon to meters
     ref_lat, ref_lon = lat[0], lon[0]  # use first point as reference
@@ -41,7 +48,9 @@ def process_raceline(lat, lon, velocity, steering_angle, dt=0.05, L=2.5):
     theta = [np.arctan2(dy, dx)]  # set initial
 
     # ensure steering angles are in radians
-    steering_angle = np.radians(steering_angle) if np.max(np.abs(steering_angle)) > np.pi else steering_angle
+    steering_angle = np.asarray(steering_angle)
+    if np.max(np.abs(steering_angle)) > np.pi:
+        steering_angle = np.radians(steering_angle)
 
     # clamping
     steering_angle = np.clip(steering_angle, np.radians(-25), np.radians(25))
@@ -50,8 +59,7 @@ def process_raceline(lat, lon, velocity, steering_angle, dt=0.05, L=2.5):
     
     for i in range(1, len(velocity)):
         x_next, y_next, theta_next = kinematic_bicycle_model(
-            x_smooth[-1], y_smooth[-1], theta[-1], velocity[i], steering_angle[i], dt, L
-        )
+            x_smooth[-1], y_smooth[-1], theta[-1], velocity[i], steering_angle[i], dt, L)
         x_smooth.append(x_next)
         y_smooth.append(y_next)
         theta.append(theta_next)
@@ -59,10 +67,21 @@ def process_raceline(lat, lon, velocity, steering_angle, dt=0.05, L=2.5):
     return np.array(x_smooth), np.array(y_smooth)
 
 # simulated example data
-latitudes = np.linspace(37.7749, 37.7755, 100)  # fake gps lat
-longitudes = np.linspace(-122.4194, -122.418, 100)  # fake gps lon
-velocity_data = np.linspace(10, 30, 100)  # increasing speed (m/s)
-steering_angle_data = np.sin(np.linspace(0, 2*np.pi, 100)) * 10  # oscillating steering angle in degrees
+num_points = 400
+
+# generate lat/lon data for a realistic racetrack-like curve
+track_radius = 20 # meters
+theta = np.linspace(0, 2 * np.pi, num_points)  # full loop
+
+latitudes = 37.7749 + (track_radius / 111111) * np.sin(theta)  # approximate conversion meters → degrees
+longitudes = -122.4194 + (track_radius / (111111 * np.cos(np.radians(37.7749)))) * np.cos(theta)
+
+# generate velocity with smooth acceleration and braking
+velocity_data = np.clip(20 + 5 * np.sin(theta * 3), 10, 35)
+
+# generate steering angle with realistic turns
+steering_angle_data = np.degrees(0.1 * np.sin(np.linspace(0, 2*np.pi, num_points) * 2))  # Reduce steering changes
+
 # wee woo
 
 
