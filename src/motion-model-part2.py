@@ -76,5 +76,5 @@ plt.scatter(*latlon_to_meters(latitudes, longitudes, latitudes[0], longitudes[0]
 plt.xlabel("x position (meters)")
 plt.ylabel("y position (meters)")
 plt.legend()
-plt.title("smoothed raceline using kinematic bicycle model")
+plt.title("model raceline w sample data")
 plt.show()

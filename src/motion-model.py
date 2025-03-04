@@ -20,12 +20,15 @@ def predict_positions(x_array, y_array, vx, vy, ax, ay, time_steps, dt):
     positions = [(x_array[0], y_array[0])]
     x, y = x_array[0], y_array[0]
     
+    vx_curr = vx[0]  # Take first velocity element
+    vy_curr = vy[0] 
+
     for t in range(1, time_steps):
-        vx += ax[t] * dt  # adjust velocity using acceleration
-        vy += ay[t] * dt
-        x += vx * dt  # update pos using new velocity
-        y += vy * dt
-        positions.append((x, y)) # erm
+        vx_curr += ax[t] * dt  # Use scalar updates
+        vy_curr += ay[t] * dt
+        x += vx_curr * dt  
+        y += vy_curr * dt
+        positions.append((x, y)) 
     
     return positions
 
@@ -91,7 +94,7 @@ def parse_and_predict_motion():
 
 def plot_trajectory(positions, overlay=False):
     x_vals, y_vals = zip(*positions)
-    plt.plot(x_vals, y_vals, marker='o', linestyle='-', color='red', label='motion model' if not overlay else 'predicted data')
+    plt.plot(x_vals, y_vals, marker='o', linestyle='-', color='red', label='motion model')
     plt.xlabel('x pos')
     plt.ylabel('y pos')
     plt.title('raceline plot')
