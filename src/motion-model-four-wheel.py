@@ -3,6 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
+init_offset_meters_x = 0
+init_offset_meters_y = 0
+first_data_processed = False
 
 with open("lap_6.json") as f:
     
@@ -14,25 +17,25 @@ L_r = 0.75  # Distance from CG to rear axle (m)
 L = L_f + L_r  # Wheelbase (m)
 W = 1.2  # Track width (m)
 
-"""
-Simulates car motion given wheel speeds, IMU accelerations, and steering angles.
-
-Parameters:
-- wheel_speeds: (N, 4) array of wheel speeds [v_FR, v_FL, v_RR, v_RL] (m/s)
-- imu_data: (N, 2) array of accelerations [a_x, a_y] (m/s^2)
-- steering_angles: (N,) array of steering angles (rad)
-- dt: Time step (s)
-
-Returns:
-- x, y, theta: Position and yaw angle over time
-"""
 x, y, theta = np.array([]), np.array([]), np.array([])
+x_real, y_real = np.array([]), np.array([])
 v_x, v_y, omega = 0, 0, 0
 ct = 0
 dt = 0.01
 #prev_t = 0
 
 for entry in json_data:
+
+    lat = entry.get("SBG_Latitude")
+    lon = entry.get("SBG_Longitude")
+    x_meters = lon * 111319.5 * math.cos(lat)
+    y_meters = lat * 111111
+    if not first_data_processed:
+        init_offset_meters_x = x_meters
+        init_offset_meters_y = y_meters
+        first_data_processed = True
+    x_real = np.append(x_real, x_meters - init_offset_meters_x)
+    y_real = np.append(y_real, y_meters - init_offset_meters_y)
 
     #if(ct > 0):
     #    dt = entry.get("t_1") - prev_t
@@ -71,22 +74,10 @@ for entry in json_data:
     ct = ct + 1
 
 
-# Example usage
-time = np.linspace(0, 10, 100)  # 10 seconds, 100 steps
-dt = time[1] - time[0]
-
-# Simulated inputs (constant acceleration, constant steering angle)
-wheel_speeds = np.ones((100, 4)) * 5  # All wheels at 5 m/s
-imu_data = np.zeros((100, 2))  # No acceleration
-steering_angles = np.ones(100) * np.radians(10)  # 10-degree steering
-
-# Run simulation
-
-
-# Plot result
 
 plt.figure(figsize=(8, 6))
-plt.plot(x, y, label='original data', alpha=0.5, c='blue')
+plt.plot(x, y, label='motion model', alpha=0.5, c='blue')
+plt.plot(x_real, y_real, label='original data', alpha=0.5, c='red')
 
 #plt.figure(figsize=(8, 6))
 #plt.plot(x, y, label='Car Path')
