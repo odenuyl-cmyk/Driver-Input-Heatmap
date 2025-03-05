@@ -25,7 +25,7 @@ const RaceLine = () => {
 
   // Fetch JSON Data
   useEffect(() => {
-    fetch('../lap_15.json')
+    fetch('../lap_6.json')
       .then(response => response.json())
       .then(data => {
         const coordArray = data.map(item => ({
@@ -63,12 +63,18 @@ const RaceLine = () => {
     // Draw spline
     ctx.beginPath();
     ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
+    
     for (let i = 1; i < scaledPoints.length - 1; i++) {
       const midX = (scaledPoints[i].x + scaledPoints[i + 1].x) / 2;
       const midY = (scaledPoints[i].y + scaledPoints[i + 1].y) / 2;
       ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].y, midX, midY);
+      console.log(scaledPoints[i].x); console.log(Date.now());
+
       //console.log('x: %f y: %f', points[i].x, points[i].y)
     }
+
+    // setInterval(() => console.log(Date.now()), 500);
+
     ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].y);
     ctx.strokeStyle = 'white';
     ctx.lineWidth = 10;
