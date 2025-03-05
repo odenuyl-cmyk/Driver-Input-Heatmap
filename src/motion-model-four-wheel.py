@@ -42,7 +42,6 @@ for entry in json_data:
     v_FL = entry.get("AMK_FL_ActualVelocity") * 2 * math.pi * 0.2032 / 60
     v_BR = entry.get("AMK_BR_ActualVelocity") * 2 * math.pi * 0.2032 / 60
     v_BL = entry.get("AMK_BL_ActualVelocity") * 2 * math.pi * 0.2032 / 60
-    swangle = entry.get("FSM_steeringWheelAngle") * 1000 * math.pi / 180
 
     # x and y accel
     a_x = entry.get("SBG_Accel_X")
@@ -54,28 +53,12 @@ for entry in json_data:
 
     v_y += a_y * dt
 
-    v_left = (v_FL + v_BL) / 2  # Average speed of left wheels (FL, RL)
-    v_right = (v_FR + v_BR) / 2  # Average speed of right wheels (FR, RR)
-    
-    # Calculate the yaw rate from the difference in wheel speeds
-    delta_v = v_right - v_left  # Difference in right-left wheel speeds
-    yaw_rate_wheel_speed = delta_v / L
-    
-    # Calculate yaw rate using the steering angle (SWAngle)
-    # Convert steering angle to radians
-    swangle_rad = math.radians(swangle)
-    
-    # Use the steering angle to calculate the turning radius
-    turning_radius = L / math.tan(swangle_rad) if swangle_rad != 0 else float('inf')
-    
-    # Calculate yaw rate using the steering angle and vehicle speed
-    yaw_rate_steering = v_x / turning_radius if turning_radius != float('inf') else 0
-    
-    # Combine both yaw rates: we can take a weighted sum, or use the average (for simplicity)
-    yaw_rate = (yaw_rate_wheel_speed + yaw_rate_steering) / 2
+    yaw_rate_front_back = (v_xf - v_xr) / L  
+    yaw_rate_left_right = ((v_FR - v_FL) + (v_BR - v_BL)) / (2 * W)
+    omega = yaw_rate_front_back + yaw_rate_left_right
 
     if(ct > 0):
-        theta = np.append(theta, theta[ct-1] + yaw_rate * dt)
+        theta = np.append(theta, theta[ct-1] + omega * dt)
         x_add = x[ct-1] + (v_x * np.cos(theta[ct]) - v_y * np.sin(theta[ct])) * dt
         y_add = y[ct-1] + (v_x * np.sin(theta[ct]) + v_y * np.cos(theta[ct])) * dt
         x = np.append(x, x_add)
