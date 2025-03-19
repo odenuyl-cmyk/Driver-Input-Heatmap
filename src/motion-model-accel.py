@@ -54,14 +54,16 @@ with open("lap_6.json") as f:
         v_fl = entry.get("AMK_FL_ActualVelocity") * 2 * 0.228 * np.pi / 60
         v_br = entry.get("AMK_BR_ActualVelocity") * 2 * 0.228 * np.pi / 60
         v_bl = entry.get("AMK_BL_ActualVelocity") * 2 * 0.228 * np.pi / 60
+
+        yaw = entry.get("SBG_Yaw")
         
         for i in range (0, 4):
             v = math.sqrt(v_x ** 2 + v_y ** 2)
             # yaw_rate = (((v_fr + v_br) / 2) - ((v_fl + v_bl) / 2)) / 1.2
             # yaw_rate = ((v_fr + v_fl + v_br + v_bl) / 4) * np.tan(swangle)
-            yaw_rate = (v / 1.5) * np.tan(swangle)
-            # yaw_rate = ((((v_fr + v_br) / 2) - ((v_fl + v_bl) / 2)) / 1.2) + ((v_fr + v_fl + v_br + v_bl) / 4) * np.tan(swangle)
-            heading += yaw_rate * dt
+            # yaw_rate = (v / 1.5) * np.tan(swangle)
+            #yaw_rate = ((((v_fr + v_br) / 2) - ((v_fl + v_bl) / 2)) / 1.2) + ((v_fr + v_fl + v_br + v_bl) / 4) * np.tan(swangle)
+            heading = yaw
             
             # correcting for direction
             acc_x = a_x * math.cos(heading) - a_y * math.sin(heading)

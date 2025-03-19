@@ -25,12 +25,12 @@ const RaceLine = () => {
 
   // Fetch JSON Data
   useEffect(() => {
-    fetch('../lap_6.json')
+    fetch("../lap_3.json")
       .then(response => response.json())
       .then(data => {
         const coordArray = data.map(item => ({
-          x: parseFloat(item.SBG_Longitude),
-          y: parseFloat(item.SBG_Latitude)
+          x: parseFloat(item.Longitude),
+          y: parseFloat(item.Latitude)
         }));
         setCoordinates(coordArray);
       })
@@ -68,9 +68,9 @@ const RaceLine = () => {
       const midX = (scaledPoints[i].x + scaledPoints[i + 1].x) / 2;
       const midY = (scaledPoints[i].y + scaledPoints[i + 1].y) / 2;
       ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].y, midX, midY);
-      console.log(scaledPoints[i].x); console.log(Date.now());
+      //console.log(scaledPoints[i].x); console.log(Date.now());
 
-      //console.log('x: %f y: %f', points[i].x, points[i].y)
+      console.log('x: %f y: %f', points[i].x, points[i].y)
     }
 
     // setInterval(() => console.log(Date.now()), 500);
