@@ -183,7 +183,6 @@ canvas {
   border-radius: 8px;
 }
 
-
 /*>>>>>>>>>>>>>>>>>>> DATA GRAPHS STYLING <<<<<<<<<<<<<<<<*/
 
 .data-graphs {
@@ -193,6 +192,26 @@ canvas {
   border: 1px solid var(--cmr-red);
   padding-top: 10px;
   border-radius: 8px;
+}
+
+/* >> VARIABLE BUTTONS CONTAINER STYLING << */
+.buttons-container {
+  display: flex;
+  justify-content: left; /* Center the buttons */
+  gap: 0px;
+}
+
+/* Style for button sections */
+.button_section {
+  width: auto;
+  text-align: center;
+}
+
+.button_section button {
+  background-color: var(--cmr-red);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
 }
 
 .data-graphs {
