@@ -4,17 +4,20 @@
 @tailwind utilities;
 
 
-/* ------------------ GENERAL STYLING ---------------*/
+/* ---------------------------------------------------------------------------*/
+/*                                GENERAL STYLING                             */
+/* ---------------------------------------------------------------------------*/
 :root {
-  font-family: "Poppins", sans-serif; /* Set default font */
+  font-family: "Poppins", sans-serif; /* sets as default font */
   --cmr-red: #AF1328;
   --cmr-black: #231f20;
-  --module-grey: #373333;
+  --module-grey: #373333; 
   --text-white: #ffffff;
+  --dark-red: #6f1300;
 }
 
 body {
-  font-family: "Poppins", sans-serif; /* Ensure body text uses Poppins */
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--cmr-black);
@@ -32,11 +35,13 @@ body {
   justify-content: center;
   padding: 20px;
   background: linear-gradient(217deg, var(--cmr-black), rgba(255,0,0,0) 70.71%),
-              linear-gradient(127deg, rgba(2, 4, 22, 0.8), rgba(0,255,0,0) 70.71%),
-              linear-gradient(336deg, rgba(92, 17, 13, 0.8), rgba(0,0,255,0) 70.71%);
+  linear-gradient(127deg, rgba(2, 4, 22, 0.8), rgba(0,255,0,0) 70.71%),
+  linear-gradient(336deg, rgba(92, 17, 13, 0.8), rgba(0,0,255,0) 70.71%);
 }
 
-/* ------------------ HEADER STYLING ---------------*/
+/* ---------------------------------------------------------------------------*/
+/*                                   HEADER                                   */
+/* ---------------------------------------------------------------------------*/
 
 .header-container {
   position: fixed; /* makes the header stay at the TOPPP */
@@ -91,7 +96,7 @@ body {
 
 .header-btn:hover {
   background: white;
-  color: var(--cmr-black);
+  color: var(--cmr-red);
 }
 
 /* this prevents content from being hidden behind the fixed header */
@@ -99,8 +104,11 @@ body {
   padding-top: 60px;
 }
 
-/* ------------- MAIN PAGE TOP DASHBOARD (TRACK-MAP, DATA GRAPHS ------------*/
-/* TODO: FINISH SEPARING TOP & BOTTOM DASHBOARDS */
+/* ---------------------------------------------------------------------------*/
+/*               MAIN PAGE TOP DASHBOARD (TRACK-MAP, DATA GRAPHS)             */
+/* ---------------------------------------------------------------------------*/
+
+/* TODO: FINISH SEPARATING TOP & BOTTOM DASHBOARDS */
 
 .homepage-dashboard-top {
   display: flex;
@@ -112,9 +120,12 @@ body {
   margin: auto;
 }
 
+/*>>>>>>>>>>>>>>>>>>> TRACK-MAP STYLING <<<<<<<<<<<<<<<<*/
+
 .track-map {
   flex-grow: 1; /* content (the trackmap!) grows to fill available space */
   width: 100%;
+  max-width: 1000px;
   height: 100%;
   background: var(--module-grey);
   border: 1px solid var(--cmr-red);
@@ -126,6 +137,7 @@ body {
   justify-content: center;
   align-items: left;
   position: relative;
+  width: 1000px;
 }
 
 .map {
@@ -142,33 +154,88 @@ canvas {
   display: block;
 }
 
-.data-graphs {
-  width: 250px;
-  flex: 1;
-  background: var(--module-grey);
-  border: 1px solid var(--cmr-red);
+.cone-counter{
+  display:flex;
+  flex-direction: row;
+  gap: 10px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  color: var(--text-white);
+  font-size: 14px;
+}
+
+.cone-display{
+  font-size: 50px;
+  top: 10px;
+} 
+
+.cone-reset{
+  background-color: var(--module-grey);
+  width: 100;
+  height: 100;
   border-radius: 8px;
 }
 
-/* these are adjust for better spacing & customization :) */
-.track-map {
-  background: var(--module-grey);
+.cone-button{
+  background-color: var(--cmr-red);
+  border: 1px solid var(--dark-red);
+  width: 100;
+  height: 100;
   border-radius: 8px;
-  width: 1000px;
 }
 
-/* .RaceLine {
-} */
+.cone-reset:hover {
+  background: white;
+  color: var(--cmr-red);
+}
+
+.cone-button:hover {
+  background: white;
+  color: var(--cmr-red);
+}
+
+/*>>>>>>>>>>>>>>>>>>> DATA GRAPHS STYLING <<<<<<<<<<<<<<<<*/
 
 .data-graphs {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  /* gap: 20px; */
+  width: 250px;
+  flex: 1;
   background: var(--module-grey);
   color: var(--text-white);
+  border: 1px solid var(--cmr-red);
   max-width: 500px;
-  max-height: 1800px;
+  max-height: 1400px;
+  padding-top: 10px;
+  border-radius: 8px;
   padding: 20px;
+}
+
+/* >> VARIABLE BUTTONS CONTAINER STYLING << */
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left; /* Center the buttons */
+  gap: 5px;
+}
+
+.button_section {
+  width: auto;
+  text-align: center;
+}
+
+.button_section button {
+  background-color: var(--cmr-red);
+  border-radius: 8px;
+  font-size: 16px;
+  border: 1px solid var(--dark-red);
+}
+
+.button_section button:hover {
+  background: white;
+  color: var(--cmr-red);
 }
 
 .heatmap {
@@ -178,16 +245,30 @@ canvas {
   border-radius: 5px;
 }
 
-/* ------------- MAIN PAGE BOTTOM DASHBOARD (LAPLIST) ------------*/
-/* TODO: FINISH SEPARING TOP & BOTTOM DASHBOARDS */
+/* ---------------------------------------------------------------------------*/
+/*                        MAIN PAGE BOTTOM DASHBOARD (LAPLIST)                */
+/* ---------------------------------------------------------------------------*/
 
 .homepage-dashboard-bot {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  width: 100%;
   gap: 20px;
-  color: var(--text-white);
-  padding: 20px;
-  width: auto;
+  padding-top: 20px;
+  margin: auto;
+}
+
+.homepage-dashboard-top {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
+  margin: auto;
 }
 
 .lap-list {
@@ -222,7 +303,7 @@ canvas {
   margin-top: 10px;
 }
 
-/* ------------------ LAPS DROPDOWN MENU ---------------*/
+/*>>>>>>>>>>>>>>>>>>> LAP LIST DROPDOWN MENU <<<<<<<<<<<<<<<<*/
 
 .dropdown {
   appearance: none;

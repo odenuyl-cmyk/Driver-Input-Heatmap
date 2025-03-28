@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header className="header-container">
       <div className="logo-container">
-        <img src="/CMRLogoWhite.png" alt="CMR Logo" className="logo" />
+        <img src="src/assets/CMRLogoWhite.png" alt="CMR Logo" className="logo" />
         <span className="title">DRIVER INPUT HEATMAP</span>
       </div>
 
