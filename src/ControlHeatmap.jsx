@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 // for the graphs
-import Graph from './Graphs';
 import BrakePlot from './BrakePlot'
 import ThrottlePlot from './ThrottlePlot';
 import SwanglePlot from './SwanglePlot';
