@@ -56,8 +56,8 @@ const RaceLine = () => {
 
     // Normalize and Scale Points
     const scaledPoints = points.map(p => ({
-      x: ((p.x - xMin) / (xMax - xMin)) * parseFloat(canvas.width - 20) + 10,
-      y: canvas.height - 10 - ((p.y - yMin) / (yMax - yMin)) * parseFloat(canvas.height - 20) // Invert y-axis
+      x: ((p.x - xMin) / (xMax - xMin)) * parseFloat(canvas.width),
+      y: canvas.height - ((p.y - yMin) / (yMax - yMin)) * parseFloat(canvas.height) // Invert y-axis
     }));
 
     // Draw spline
