@@ -6,7 +6,6 @@ import CanvasTest from './RaceLine.jsx';
 import Spline from './TrackMap.jsx';
 import TrackMap from './TrackMap.jsx';
 import SteeringWheel from './SteeringWheel.jsx';
-import Graph from './Graphs.jsx';
 import { Line } from 'react-chartjs-2';
 import Header from './Header.jsx';
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale } from 'chart.js';

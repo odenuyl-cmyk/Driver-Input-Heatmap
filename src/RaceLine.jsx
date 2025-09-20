@@ -25,12 +25,12 @@ const RaceLine = () => {
 
   // Fetch JSON Data
   useEffect(() => {
-    fetch('../spa_raceline.json')
+    fetch("../lap_3.json")
       .then(response => response.json())
       .then(data => {
         const coordArray = data.map(item => ({
-          x: item.x_m,
-          y: item.y_m
+          x: parseFloat(item.Longitude),
+          y: parseFloat(item.Latitude)
         }));
         setCoordinates(coordArray);
       })
@@ -43,31 +43,38 @@ const RaceLine = () => {
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    canvas.width = canvasSize.width;
-    canvas.height = canvasSize.height;
+    canvas.width = parseFloat(canvasSize.width);
+    canvas.height = parseFloat(canvasSize.height);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Find min & max values for normalization
-    const xMin = Math.min(...points.map(p => p.x));
-    const xMax = Math.max(...points.map(p => p.x));
-    const yMin = Math.min(...points.map(p => p.y));
-    const yMax = Math.max(...points.map(p => p.y));
+    const xMin = parseFloat(Math.min(...points.map(p => p.x)));
+    const xMax = parseFloat(Math.max(...points.map(p => p.x)));
+    const yMin = parseFloat(Math.min(...points.map(p => p.y)));
+    const yMax = parseFloat(Math.max(...points.map(p => p.y)));
 
     // Normalize and Scale Points
     const scaledPoints = points.map(p => ({
-      x: ((p.x - xMin) / (xMax - xMin)) * canvasSize.width,
-      y: canvasSize.height - ((p.y - yMin) / (yMax - yMin)) * canvasSize.height // Invert y-axis
+      x: ((p.x - xMin) / (xMax - xMin)) * parseFloat(canvas.width),
+      y: canvas.height - ((p.y - yMin) / (yMax - yMin)) * parseFloat(canvas.height) // Invert y-axis
     }));
 
     // Draw spline
     ctx.beginPath();
     ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
+    
     for (let i = 1; i < scaledPoints.length - 1; i++) {
       const midX = (scaledPoints[i].x + scaledPoints[i + 1].x) / 2;
       const midY = (scaledPoints[i].y + scaledPoints[i + 1].y) / 2;
       ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].y, midX, midY);
+      //console.log(scaledPoints[i].x); console.log(Date.now());
+
+      console.log('x: %f y: %f', points[i].x, points[i].y)
     }
+
+    // setInterval(() => console.log(Date.now()), 500);
+
     ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].y);
     ctx.strokeStyle = 'white';
     ctx.lineWidth = 10;

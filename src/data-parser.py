@@ -6,9 +6,9 @@ import pandas as pd
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"mdf file path"
-sample_csv = r"csv file path"
-sample_json = r"json file path"
+sample_logfile = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile_2024-09-28_11-50-57.mdf"
+sample_csv = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/03-15-25-RTK-data.csv"
+sample_json = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/data.json"
 
 #mdf = MDF(sample_logfile)
 # print("Available Channels:")
@@ -27,24 +27,23 @@ selected_signals = [
     "AMK_BR_ActualVelocity",   # Back-right wheel actual velocity
     "SBG_Accel_X",             # X-acceleration
     "SBG_Accel_Y",             # Y-acceleration
+    "SBG_Body_Vel"
     "FSM_throttlePos",         # throttle position
     "FR_Calibrated_Output",    # load cell
     "RL_Calibrated_Output",    # load cell
-    "SBG_Latitude_Acc",        # position
-    "SBG_Longitude_Acc",       # position
+    "SBG_Latitude",        # position
+    "SBG_Longitude",       # position
     "FSM_steeringWheelAngle",  # swangle
     "HVI_Voltage",             # Power: Voltage
     "HVI_Current",             # Power: Current
-    "HVI_Power"                # Power: Power
+    "HVI_Power",                # Power: Power
+    "SBG_Yaw"
 ]
 
 # Function to convert MDF file to JSON with selected channels
 
-#yop = mdfreader.Mdf(sample_logfile, channel_list=selected_signals, convert_after_read=False)
-#yop.export_to_csv(sampling=0.01)
-
-yop = mdfreader.Mdf("mdf file name", channel_list=selected_signals, convert_after_read=False)
-yop.export_to_csv(sampling=0.01)
+# yop = mdfreader.Mdf(sample_logfile, channel_list=selected_signals, convert_after_read=False)
+# yop.export_to_csv(sampling=0.01)
 
 def csv_to_json(csv_file, json_file):
     df = pd.read_csv(csv_file)

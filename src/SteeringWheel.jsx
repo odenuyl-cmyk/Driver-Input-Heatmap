@@ -13,7 +13,7 @@ const SteeringWheel = ({ data }) => {
   return (
     <div className="steering-wheel-section justify-center">
       <img
-        src="/steering-wheel-graphic.png"
+        src="/imgs/steering-wheel-graphic.png"
         className="steering-wheel"
         style={{ transform: `rotate(${angle}deg)` }}
       />
