@@ -30,7 +30,8 @@ const RaceLine = () => {
       .then(data => {
         const coordArray = data.map(item => ({
           x: parseFloat(item.Longitude),
-          y: parseFloat(item.Latitude)
+          y: parseFloat(item.Latitude),
+          z: parseFloat(item.Acc_X)
         }));
         setCoordinates(coordArray);
       })
@@ -68,7 +69,12 @@ const RaceLine = () => {
       const midX = (scaledPoints[i].x + scaledPoints[i + 1].x) / 2;
       const midY = (scaledPoints[i].y + scaledPoints[i + 1].y) / 2;
       ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].y, midX, midY);
-      //console.log(scaledPoints[i].x); console.log(Date.now());
+      ctx.strokeStyle = `rgb(
+       ${(scaledPoints[i].z)*10 + 100}
+       ${(scaledPoints[i].z)*10 + 100}
+       ${(scaledPoints[i].z)*10 + 100})`;
+      ctx.lineWidth = 10;
+      ctx.stroke();
 
       console.log('x: %f y: %f', points[i].x, points[i].y)
     }
@@ -76,7 +82,7 @@ const RaceLine = () => {
     // setInterval(() => console.log(Date.now()), 500);
 
     ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].y);
-    ctx.strokeStyle = 'white';
+    ctx.strokeStyle = `white`;
     ctx.lineWidth = 10;
     ctx.stroke();
 
