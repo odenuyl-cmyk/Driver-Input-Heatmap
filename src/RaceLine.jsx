@@ -31,7 +31,9 @@ const RaceLine = () => {
         const coordArray = data.map(item => ({
           x: parseFloat(item.Longitude),
           y: parseFloat(item.Latitude),
-          z: parseFloat(item.Acc_X)
+          Ax: parseFloat(item.Acc_X),
+          Ay: parseFloat(item.Acc_Y),
+          Az: parseFloat(item.Acc_Z)
         }));
         setCoordinates(coordArray);
       })
@@ -57,34 +59,39 @@ const RaceLine = () => {
 
     // Normalize and Scale Points
     const scaledPoints = points.map(p => ({
-      x: ((p.x - xMin) / (xMax - xMin)) * parseFloat(canvas.width),
-      y: canvas.height - ((p.y - yMin) / (yMax - yMin)) * parseFloat(canvas.height) // Invert y-axis
+      x: ((p.x - xMin) / (xMax - xMin)) * parseFloat(0.9*canvas.width) + parseFloat(0.05*canvas.width),
+      y: canvas.height - ((p.y - yMin) / (yMax - yMin)) * parseFloat(0.9*canvas.height) - parseFloat(0.05*canvas.height), // Invert y-axis
+      Ax: p.Ax,
+      Ay: p.Ay,
+      Az: p.Az
     }));
 
     // Draw spline
-    ctx.beginPath();
-    ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
+    // ctx.beginPath();
+    // ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
     
     for (let i = 1; i < scaledPoints.length - 1; i++) {
       const midX = (scaledPoints[i].x + scaledPoints[i + 1].x) / 2;
       const midY = (scaledPoints[i].y + scaledPoints[i + 1].y) / 2;
+      ctx.beginPath();
+      ctx.moveTo(scaledPoints[i-1].x, scaledPoints[i-1].y);
       ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].y, midX, midY);
       ctx.strokeStyle = `rgb(
-       ${(scaledPoints[i].z)*10 + 100}
-       ${(scaledPoints[i].z)*10 + 100}
-       ${(scaledPoints[i].z)*10 + 100})`;
+       ${(scaledPoints[i].Ax)*100 % 255},
+       ${(scaledPoints[i].Ay)*100 % 255},
+       ${(scaledPoints[i].Az)*5 % 255})`;
       ctx.lineWidth = 10;
       ctx.stroke();
 
-      console.log('x: %f y: %f', points[i].x, points[i].y)
+      console.log('x: %f y: %f z: %f', points[i].x, points[i].y)
     }
 
     // setInterval(() => console.log(Date.now()), 500);
 
-    ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].y);
-    ctx.strokeStyle = `white`;
-    ctx.lineWidth = 10;
-    ctx.stroke();
+    //ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].y);
+    //ctx.strokeStyle = `white`;
+    //ctx.lineWidth = 10;
+    //ctx.stroke();
 
   }, [points, canvasSize]);
 
