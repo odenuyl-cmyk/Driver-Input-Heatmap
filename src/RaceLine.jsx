@@ -1,6 +1,20 @@
 import React, { useRef, useEffect, useState } from 'react';
+import {state} from './state'
 
 const RaceLine = () => {
+  const [lapCount, setLapCount] = useState(state.counter - 1);
+  useEffect(() => {
+    // React to global state changes
+    const interval = setInterval(() => {
+      if (lapCount !== state.counter - 1) {
+        setLapCount(state.counter - 1);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [lapCount]);
+
+
   const canvasRef = useRef(null);
   const [points, setCoordinates] = useState([]);
   
@@ -25,7 +39,8 @@ const RaceLine = () => {
 
   // Fetch JSON Data
   useEffect(() => {
-    fetch("../lap_3.json")
+    const laps = ["../lap_1.json", "../lap_2.json", "../lap_3.json", "../lap_4.json", "../lap_5.json"];
+    fetch(state.laps[lapCount])
       .then(response => response.json())
       .then(data => {
         const coordArray = data.map(item => ({
@@ -38,7 +53,7 @@ const RaceLine = () => {
         setCoordinates(coordArray);
       })
       .catch(error => console.error('Error fetching the data:', error));
-  }, []);
+  }, [lapCount]);
 
   // Draw on Canvas when `points` or `canvasSize` updates
   useEffect(() => {

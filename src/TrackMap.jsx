@@ -1,16 +1,21 @@
 import React from 'react';
 import RaceLine from './RaceLine';
 import LapDropdown from './LapCompare';
+import {state} from './state'
 
 const TrackMap = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(1);
 
   const handleClick = () => {
-    setCount(count + 1);
+    if (count < (state.laps).length){
+      setCount(count + 1);
+      state.counter += 1;
+    }
   };
 
   const resetClick = () => {
-    setCount(0);
+    setCount(1);
+    state.counter = 1;
   };
 
   return (

@@ -6,9 +6,9 @@ import pandas as pd
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"C:/Users/josep/heatmap/driver-input-heatmap/src/logfile2024-10-03_13-44-50.mdf"
-sample_csv = r"C:/Users/josep/heatmap/driver-input-heatmap/src/logfile2024-10-03_13-44-50.csv"
-sample_json = r"C:/Users/josep/heatmap/driver-input-heatmap/src/logfile2024-10-03_13-44-50.json"
+sample_logfile = r"C:/Users/odenu/OneDrive\Documents/GitHub/driver-input-heatmap/src/logfile2024-10-03_13-44-50.mdf"
+sample_csv = r"C:/Users/odenu/OneDrive\Documents/GitHub/driver-input-heatmap/src/logfile2024-10-03_13-44-50.csv"
+sample_json = r"C:/Users/odenu/OneDrive\Documents/GitHub/driver-input-heatmap/src/logfile2024-10-03_13-44-50.json"
 
 #mdf = MDF(sample_logfile)
 # print("Available Channels:")
