@@ -5,7 +5,7 @@ import pandas as pd
 
 set_global_option("raise_on_multiple_occurrences", False)
 
-sample_logfile = MDF("/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile_2024-09-28_11-50-57.mdf")
+sample_logfile = MDF("/Users/drach/Downloads/driver-input-heatmap/logfile2024-10-03_10-34-09.mdf")
 
 
 #sample_logfile = r"/Users/nidhivadlamudi/Desktop/CMR/driver-input-heatmap/logfile_2024-09-28_11-50-57.mdf"
