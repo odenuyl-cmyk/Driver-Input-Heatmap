@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
+import {state} from './state'
 import { Chart as ChartJS, Title, Tooltip, Legend, PointElement, LineElement, CategoryScale, LinearScale } from 'chart.js';
 
 ChartJS.register(Title, Tooltip, Legend, PointElement, LineElement, CategoryScale, LinearScale);
@@ -7,19 +8,31 @@ ChartJS.register(Title, Tooltip, Legend, PointElement, LineElement, CategoryScal
 const BrakePlot = () => {
 
   const [coordinates, setCoordinates] = useState([]);
+  const [lapCount, setLapCount] = useState(state.counter - 1);
+        useEffect(() => {
+          // React to global state changes
+          const interval = setInterval(() => {
+            if (lapCount !== state.counter - 1) {
+              setLapCount(state.counter - 1);
+            }
+          }, 100);
+      
+          return () => clearInterval(interval);
+        }, [lapCount]);
 
   useEffect(() => {
-    fetch('../data.json') // Replace with the correct path to imported data fileee
+    fetch(state.laps[lapCount]) // Replace with the correct path to imported data fileee
       .then(response => response.json())
       .then(data => {
+        // NOT CORRECT DATA YET 
         const coordArray = data.map(item => ({
-          x: item.t_1,
-          y: item.FSM_brakePressureFront
+          x: item.Acc_Z,
+          y: item.Acc_Y
         }));
         setCoordinates(coordArray);
       })
       .catch(error => console.error('Error fetching the data:', error));
-  }, []);
+  }, [lapCount]);
 
   const data = {
     labels: coordinates.map((point, index) => index),
