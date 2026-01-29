@@ -1,14 +1,14 @@
 import React from 'react';
 import RaceLine from './RaceLine';
-//import RaceLineCompare from './RaceLineCompare';
+import RaceLineCompare from './RaceLineCompare';
 import LapDropdown from './LapCompare';
 import {state} from './state'
 
 const TrackMap = () => {
   const [count, setCount] = React.useState(1);
   const [mode, setMode] = React.useState(1);
-  const [compareLap1, setCompareLap1] = React.useState(1);
-  const [compareLap2, setCompareLap2] = React.useState(2);
+  const [compareLap1, setCompareLap1] = React.useState(state.lapCompare1);
+  const [compareLap2, setCompareLap2] = React.useState(state.lapCompare2);
 
   const decreaseClick = () => {
     if (count > 1){
@@ -42,28 +42,28 @@ const TrackMap = () => {
   const decreaseCompare1 = () => {
     if (compareLap1 > 1){
       setCompareLap1(compareLap1 - 1);
-      state.lapCompare[0] -= 1;
+      state.lapCompare1 -= 1;
     }
   };
 
   const increaseCompare1 = () => {
     if (compareLap1 < (state.laps).length){
       setCompareLap1(compareLap1 + 1);
-      state.lapCompare[0] += 1;
+      state.lapCompare1 += 1;
     }
   };
 
   const decreaseCompare2 = () => { 
     if (compareLap2 > 1){
       setCompareLap2(compareLap2 - 1);
-      state.lapCompare[1] -= 1;
+      state.lapCompare2 -= 1;
     }
   };
 
   const increaseCompare2 = () => {
     if (compareLap2 < (state.laps).length){
       setCompareLap2(compareLap2 + 1);
-      state.lapCompare[1] += 1;
+      state.lapCompare2 += 1;
     }
   };
 
@@ -96,7 +96,7 @@ const TrackMap = () => {
         <h2>Track Map</h2>
 
         <div className="cone-counter">
-          <div className="count-display">Mode: Compare Laps ({state.lapCompare[0] + 1} and {state.lapCompare[1] + 1})</div>
+          <div className="count-display">Mode: Compare Laps ({state.lapCompare1} and {state.lapCompare2})</div>
           <button className="cone-reset" onClick={resetClick}><img src="src\assets\reset-icon.png" style={{width:20, height: 20}} alt="Reset Cone Button"/></button>
           <button className="cone-button" onClick={decreaseCompare1}>First -</button>
           <button className="cone-button" onClick={increaseCompare1}>First +</button>
@@ -106,8 +106,7 @@ const TrackMap = () => {
         </div>
 
         <div className="map">
-          aaaaa
-            {/* <RaceLineCompare /> */}
+          <RaceLineCompare />
         </div>
       </div>
     );
