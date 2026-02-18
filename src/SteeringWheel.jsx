@@ -19,7 +19,7 @@ const SteeringWheel = ({ data }) => {
       />
 
       {/* TODO: needs to add to this so that it takes in real time data */}
-      <div classname="steering-wheel-angle-display">Angle Display Placeholder</div>
+      <div className="steering-wheel-angle-display">Angle Display Placeholder</div>
     </div>
   );
 };
