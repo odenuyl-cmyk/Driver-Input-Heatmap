@@ -1,0 +1,10 @@
+{
+  "Lap Number": 1,
+  "Start Index": 0,
+  "End Index": 65121,
+  "Start Time": 0.0,
+  "End Time": 651.2100000000006,
+  "Duration": 651.2100000000006,
+  "Samples": 65122,
+  "Reason": "No latitude/longitude keys available; fallback single lap"
+}

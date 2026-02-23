@@ -9,6 +9,21 @@ const TrackMap = () => {
   const [mode, setMode] = React.useState(1);
   const [compareLap1, setCompareLap1] = React.useState(1);
   const [compareLap2, setCompareLap2] = React.useState(2);
+  const [dataVersion, setDataVersion] = React.useState(state.version);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (dataVersion !== state.version) {
+        setDataVersion(state.version);
+        setCount(state.counter);
+        setMode(state.mode);
+        setCompareLap1(state.lapCompare[0] + 1);
+        setCompareLap2(state.lapCompare[1] + 1);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [dataVersion]);
 
   const decreaseClick = () => {
     if (count > 1){

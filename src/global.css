@@ -99,6 +99,12 @@ body {
   color: var(--cmr-red);
 }
 
+.import-status {
+  font-size: 12px;
+  align-self: center;
+  white-space: nowrap;
+}
+
 /* this prevents content from being hidden behind the fixed header */
 .full-dashboard {
   padding-top: 60px;

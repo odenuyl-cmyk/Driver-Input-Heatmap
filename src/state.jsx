@@ -4,4 +4,5 @@ export const state =
     counter: 1,
     mode: 1,
     lapCompare: [0, 1],
+    version: 0,
 };
