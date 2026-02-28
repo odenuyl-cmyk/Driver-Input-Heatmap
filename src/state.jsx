@@ -4,5 +4,5 @@ export const state =
     counter: 1,
     mode: 1,
     lapCompare1: 1,
-    lapCompare2: 2
+    lapCompare2: 1
 };

@@ -68,70 +68,6 @@ const RaceLineCompare = () => {
       .catch(error => console.error('Error fetching the data:', error));
   }, [lapCount1]);
 
-  // Draw on Canvas when `points1` or `canvasSize` updates
-  useEffect(() => {
-    if (points1.length === 0 || !canvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    //canvas.width = parseFloat(canvasSize.width);
-    //canvas.height = parseFloat(canvasSize.height);
-
-    ctx.clearRect(0, canvas.height/4, canvas.width/2, canvas.height/2);
-
-    // Find min & max values for normalization
-    const xMin = parseFloat(Math.min(...points1.map(p => p.x)));
-    const xMax = parseFloat(Math.max(...points1.map(p => p.x)));
-    const yMin = parseFloat(Math.min(...points1.map(p => p.y)));
-    const yMax = parseFloat(Math.max(...points1.map(p => p.y)));
-
-    // Normalize and Scale Points
-    const scaleX = canvas.width / 2;
-    const scaleY = canvas.height / 2;
-
-    const scaledPoints1 = points1.map(p => ({
-      x: ((p.x - xMin) / (xMax - xMin)) * 0.9 * scaleX + 0.05 * scaleX,
-      y: scaleY - ((p.y - yMin) / (yMax - yMin)) * 0.9 * scaleY - 0.05 * scaleY + scaleY/2,
-      Ax: p.Ax,
-      Ay: p.Ay,
-      Az: p.Az
-    }));
-
-    // Draw spline
-    // ctx.beginPath();
-    // ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
-    const scaledPointsSmall1 = [];
-    for (let i = 1; i < scaledPoints1.length - 1; i++) {
-      if (i % 1 == 0){
-        scaledPointsSmall1.push(scaledPoints1[i])
-      }
-    }
-    
-    for (let i = 1; i < scaledPointsSmall1.length - 1; i++) {
-      const midX = (scaledPointsSmall1[i].x + scaledPointsSmall1[i + 1].x) / 2;
-      const midY = (scaledPointsSmall1[i].y + scaledPointsSmall1[i + 1].y) / 2;
-      ctx.beginPath();
-      ctx.moveTo(scaledPointsSmall1[i-1].x, scaledPointsSmall1[i-1].y);
-      ctx.quadraticCurveTo(scaledPointsSmall1[i].x, scaledPointsSmall1[i].y, midX, midY);
-      ctx.strokeStyle = `rgb(
-      ${(scaledPointsSmall1[i].Ax)*100 % 255},
-      ${(scaledPointsSmall1[i].Ay)*100 % 255},
-      ${(scaledPointsSmall1[i].Az)*5 % 255})`;
-      ctx.lineWidth = 2.5;
-      ctx.stroke();
-
-      console.log('x: %f y: %f z: %f', points1[i].x, points1[i].y)
-    }
-
-    // setInterval(() => console.log(Date.now()), 500);
-
-    //ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].y);
-    //ctx.strokeStyle = `white`;
-    //ctx.lineWidth = 10;
-    //ctx.stroke();
-
-  }, [points1, canvasSize]);
-
   useEffect(() => {
     // const laps = ["../lap_1.json", "../lap_2.json", "../lap_3.json", "../lap_4.json", "../lap_5.json"];
     fetch(state.laps[lapCount2 - 1])
@@ -149,63 +85,58 @@ const RaceLineCompare = () => {
       .catch(error => console.error('Error fetching the data:', error));
   }, [lapCount2]);
 
-  // Draw on Canvas when `points2` or `canvasSize` updates
   useEffect(() => {
-    if (points2.length === 0 || !canvasRef.current) return;
+  if (!canvasRef.current) return;
+  if (!points1.length && !points2.length) return;
 
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    //canvas.width = parseFloat(canvasSize.width);
-    //canvas.height = parseFloat(canvasSize.height);
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext("2d");
 
-    ctx.clearRect(canvas.width/2, canvas.height/4, canvas.width/2, canvas.height/2);
+  canvas.width = canvasSize.width;
+  canvas.height = canvasSize.height;
 
-    // Find min & max values for normalization
-    const xMin = parseFloat(Math.min(...points2.map(p => p.x)));
-    const xMax = parseFloat(Math.max(...points2.map(p => p.x)));
-    const yMin = parseFloat(Math.min(...points2.map(p => p.y)));
-    const yMax = parseFloat(Math.max(...points2.map(p => p.y)));
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Normalize and Scale Points
+  const drawLap = (points, xOffset = 0) => {
+    if (!points.length) return;
+
+    const xMin = Math.min(...points.map(p => p.x));
+    const xMax = Math.max(...points.map(p => p.x));
+    const yMin = Math.min(...points.map(p => p.y));
+    const yMax = Math.max(...points.map(p => p.y));
+
     const scaleX = canvas.width / 2;
-    const scaleY = canvas.height / 2;
+    const scaleY = canvas.height;
 
-    const scaledPoints2 = points2.map(p => ({
-      x: scaleX + ((p.x - xMin) / (xMax - xMin)) * 0.9 * scaleX + 0.05 * scaleX,
-      y: scaleY + scaleY - ((p.y - yMin) / (yMax - yMin)) * 0.9 * scaleY - 0.05 * scaleY - scaleY/2,
+    const scaled = points.map(p => ({
+      x: xOffset + ((p.x - xMin) / (xMax - xMin)) * 0.9 * scaleX + 0.05 * scaleX,
+      y: .5 *(canvas.height - ((p.y - yMin) / (yMax - yMin)) * 0.9 * canvas.height - 0.05 * canvas.height) + canvas.height/4,
       Ax: p.Ax,
       Ay: p.Ay,
       Az: p.Az
     }));
 
-    // Draw spline
-    // ctx.beginPath();
-    // ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
-    
-    for (let i = 1; i < scaledPoints2.length - 1; i++) {
-      const midX = (scaledPoints2[i].x + scaledPoints2[i + 1].x) / 2;
-      const midY = (scaledPoints2[i].y + scaledPoints2[i + 1].y) / 2;
+    for (let i = 1; i < scaled.length - 1; i++) {
+      const midX = (scaled[i].x + scaled[i + 1].x) / 2;
+      const midY = (scaled[i].y + scaled[i + 1].y) / 2;
+
       ctx.beginPath();
-      ctx.moveTo(scaledPoints2[i-1].x, scaledPoints2[i-1].y);
-      ctx.quadraticCurveTo(scaledPoints2[i].x, scaledPoints2[i].y, midX, midY);
+      ctx.moveTo(scaled[i - 1].x, scaled[i - 1].y);
+      ctx.quadraticCurveTo(scaled[i].x, scaled[i].y, midX, midY);
       ctx.strokeStyle = `rgb(
-      ${(scaledPoints2[i].Ax)*100 % 255},
-      ${(scaledPoints2[i].Ay)*100 % 255},
-      ${(scaledPoints2[i].Az)*5 % 255})`;
-      ctx.lineWidth = 2.5;
+        ${(scaled[i].Ax * 100) % 255},
+        ${(scaled[i].Ay * 100) % 255},
+        ${(scaled[i].Az * 5) % 255}
+      )`;
+      ctx.lineWidth = 10;
       ctx.stroke();
-
-      console.log('x: %f y: %f z: %f', points2[i].x, points2[i].y)
     }
+  };
 
-    // setInterval(() => console.log(Date.now()), 500);
+  drawLap(points1, 0);
+  drawLap(points2, canvas.width / 2);
 
-    //ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].y);
-    //ctx.strokeStyle = `white`;
-    //ctx.lineWidth = 10;
-    //ctx.stroke();
-
-  }, [points2, canvasSize]);
+}, [points1, points2, canvasSize]);
 
   return (
     <canvas ref={canvasRef} style={{ width: "100%", height: "100%" }} />
