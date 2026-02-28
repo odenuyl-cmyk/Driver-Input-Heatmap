@@ -125,7 +125,7 @@ body {
 .track-map {
   flex-grow: 1; /* content (the trackmap!) grows to fill available space */
   width: 100%;
-  max-width: 1000px;
+  max-width: 1500px;
   height: 100%;
   background: var(--module-grey);
   border: 1px solid var(--cmr-red);
@@ -201,7 +201,7 @@ canvas {
   display: flex;
   flex-direction: column;
   /* gap: 20px; */
-  width: 250px;
+  width: 350px;
   flex: 1;
   background: var(--module-grey);
   color: var(--text-white);

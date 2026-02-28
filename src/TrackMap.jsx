@@ -4,9 +4,9 @@ import RaceLineCompare from './RaceLineCompare';
 import LapDropdown from './LapCompare';
 import {state} from './state'
 
-const TrackMap = () => {
+const TrackMap = ({mode, setMode}) => {
   const [count, setCount] = React.useState(1);
-  const [mode, setMode] = React.useState(1);
+  // const [mode, setMode] = React.useState(1);
   const [compareLap1, setCompareLap1] = React.useState(state.lapCompare1);
   const [compareLap2, setCompareLap2] = React.useState(state.lapCompare2);
 

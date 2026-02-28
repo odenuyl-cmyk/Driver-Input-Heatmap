@@ -100,17 +100,23 @@ const RaceLineCompare = () => {
     // Draw spline
     // ctx.beginPath();
     // ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
-    
+    const scaledPointsSmall1 = [];
     for (let i = 1; i < scaledPoints1.length - 1; i++) {
-      const midX = (scaledPoints1[i].x + scaledPoints1[i + 1].x) / 2;
-      const midY = (scaledPoints1[i].y + scaledPoints1[i + 1].y) / 2;
+      if (i % 1 == 0){
+        scaledPointsSmall1.push(scaledPoints1[i])
+      }
+    }
+    
+    for (let i = 1; i < scaledPointsSmall1.length - 1; i++) {
+      const midX = (scaledPointsSmall1[i].x + scaledPointsSmall1[i + 1].x) / 2;
+      const midY = (scaledPointsSmall1[i].y + scaledPointsSmall1[i + 1].y) / 2;
       ctx.beginPath();
-      ctx.moveTo(scaledPoints1[i-1].x, scaledPoints1[i-1].y);
-      ctx.quadraticCurveTo(scaledPoints1[i].x, scaledPoints1[i].y, midX, midY);
+      ctx.moveTo(scaledPointsSmall1[i-1].x, scaledPointsSmall1[i-1].y);
+      ctx.quadraticCurveTo(scaledPointsSmall1[i].x, scaledPointsSmall1[i].y, midX, midY);
       ctx.strokeStyle = `rgb(
-      ${(scaledPoints1[i].Ax)*100 % 255},
-      ${(scaledPoints1[i].Ay)*100 % 255},
-      ${(scaledPoints1[i].Az)*5 % 255})`;
+      ${(scaledPointsSmall1[i].Ax)*100 % 255},
+      ${(scaledPointsSmall1[i].Ay)*100 % 255},
+      ${(scaledPointsSmall1[i].Az)*5 % 255})`;
       ctx.lineWidth = 2.5;
       ctx.stroke();
 
