@@ -201,12 +201,12 @@ canvas {
   display: flex;
   flex-direction: column;
   /* gap: 20px; */
-  width: 350px;
-  flex: 1;
+  width: 450px;
   background: var(--module-grey);
   color: var(--text-white);
   border: 1px solid var(--cmr-red);
-  max-width: 500px;
+  min-width: 450px;
+  max-width: 450px;
   max-height: 1400px;
   padding-top: 10px;
   border-radius: 8px;

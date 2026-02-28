@@ -25,8 +25,15 @@ const TrackMap = ({mode, setMode}) => {
   };
 
   const resetClick = () => {
-    setCount(1);
-    state.counter = 1;
+    if (mode == 1){
+      setCount(1);
+      state.counter = 1;
+    } else if (mode == 2){
+      setCompareLap1(1);
+      state.lapCompare1 = 1;
+      setCompareLap2(1);
+      state.lapCompare2 = 1;
+    }
   };
 
   const toggleClick = () => {
