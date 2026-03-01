@@ -6,9 +6,9 @@ import pandas as pd
 set_global_option("raise_on_multiple_occurrences", False)
 
 
-sample_logfile = r"C:/Users/drach/Downloads/driver-input-heatmap/src/logfile2024-10-03_13-44-50.mdf"
-sample_csv = r"C:/Users/drach/Downloads/driver-input-heatmap/src/logfile2024-10-03_13-44-50.csv"
-sample_json = r"C:/Users/drach/Downloads/driver-input-heatmap/src/logfile2024-10-03_13-44-50.json"
+sample_logfile = r"C:/Users/josep/heatmap/driver-input-heatmap/src/logfile_2025-04-23_13-30-16.mdf"
+sample_csv = r"C:/Users/josep/heatmap/driver-input-heatmap/src/logfile_2025-04-23_13-30-16.csv"
+sample_json = r"C:/Users/josep/heatmap/driver-input-heatmap/src/logfile_2025-04-23_13-30-16.json"
 
 #mdf = MDF(sample_logfile)
 # print("Available Channels:")
@@ -47,10 +47,10 @@ selected_signals = [
     "Movella_AccX",
     "Movella_AccY",
     "Movella_AccZ",
-    "Movella_x",
-    "Movella_y",
-    "Movella_z",
-    "FSM_brakePressureFront"
+    "FSM_throttlePos",
+    "FSM_brakePressureFront",
+    "Movella_Latitude",
+    "Movella_Longitude"
 ]
 
 # Function to convert MDF file to JSON with selected channels
