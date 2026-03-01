@@ -10,16 +10,20 @@ const normalize = (value, min, max) => {
 //for (let i = 0; i < state.mode; i++) {
   const RaceLine = () => {
     const [lapCount, setLapCount] = useState(state.counter - 1);
+    const [dataVersion, setDataVersion] = useState(state.version);
     useEffect(() => {
       // React to global state changes
       const interval = setInterval(() => {
         if (lapCount !== state.counter - 1) {
           setLapCount(state.counter - 1);
         }
+        if (dataVersion !== state.version) {
+          setDataVersion(state.version);
+        }
       }, 100);
 
       return () => clearInterval(interval);
-    }, [lapCount]);
+    }, [lapCount, dataVersion]);
 
 
     const canvasRef = useRef(null);
@@ -47,7 +51,12 @@ const normalize = (value, min, max) => {
     // Fetch JSON Data
     useEffect(() => {
       // const laps = ["../lap_1.json", "../lap_2.json", "../lap_3.json", "../lap_4.json", "../lap_5.json"];
-      fetch(state.laps[lapCount])
+      const lapPath = state.laps[lapCount];
+      if (!lapPath) {
+        setCoordinates([]);
+        return;
+      }
+      fetch(lapPath)
         .then(response => response.json())
         .then(data => {
           const coordArray = data.map(item => ({
@@ -62,7 +71,7 @@ const normalize = (value, min, max) => {
           setCoordinates(coordArray);
         })
         .catch(error => console.error('Error fetching the data:', error));
-    }, [lapCount]);
+    }, [lapCount, dataVersion]);
 
     // Draw on Canvas when `points` or `canvasSize` updates
     useEffect(() => {

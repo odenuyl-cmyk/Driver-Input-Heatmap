@@ -6,9 +6,23 @@ import {state} from './state'
 
 const TrackMap = ({mode, setMode}) => {
   const [count, setCount] = React.useState(1);
-  // const [mode, setMode] = React.useState(1);
-  const [compareLap1, setCompareLap1] = React.useState(state.lapCompare1);
-  const [compareLap2, setCompareLap2] = React.useState(state.lapCompare2);
+  const [compareLap1, setCompareLap1] = React.useState(1);
+  const [compareLap2, setCompareLap2] = React.useState(1);
+  const [dataVersion, setDataVersion] = React.useState(state.version);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (dataVersion !== state.version) {
+        setDataVersion(state.version);
+        setCount(state.counter);
+        setMode(state.mode);
+        setCompareLap1(state.lapCompare1 + 1);
+        setCompareLap2(state.lapCompare2 + 1);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [dataVersion]);
 
   const decreaseClick = () => {
     if (count > 1){
