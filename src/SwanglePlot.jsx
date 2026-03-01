@@ -27,8 +27,8 @@ const SwanglePlot = () => {
       .then(data => {
         // NOT CORRECT DATA YET
         const coordArray = data.map(item => ({
-          x: item.Acc_X,
-          y: item.Acc_Y
+          x: item.t_25,
+          y: item.Movella_Longitude
         }));
         setCoordinates(coordArray);
       })

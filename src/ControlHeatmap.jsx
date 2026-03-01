@@ -15,13 +15,13 @@ const ControlHeatmap = () => {
     <div className="data-graphs">
       <h2>Data Graphs</h2>
 
-      {/* note: no actions linked yet, graphs don't get toggled on/off with graphs yet */}
-      <div className="buttons-container"> {/* New div to hold all the buttons */}
-        <BrakeButton/>
-        <ThrottleButton/>
-        <AccelButton/>
-        <SwangleButton/>
-      </div>
+      {/* note: no actions linked yet, graphs don't get toggled on/off with buttons yet */}
+      {/* <div className="buttons-container"> New div to hold all the buttons */}
+        {/* <BrakeButton/> */}
+        {/* <ThrottleButton/> */}
+        {/* <AccelButton/> */}
+        {/* <SwangleButton/> */}
+      {/* </div> */}
 
       <div className="heatmap">
         <BrakePlot />
@@ -29,9 +29,9 @@ const ControlHeatmap = () => {
       <div className="heatmap">
         <ThrottlePlot />
       </div>
-      <div className="heatmap">
-        <SwanglePlot />
-      </div>
+      {/* <div className="heatmap"> */}
+        {/* <SwanglePlot /> */}
+      {/* </div> */}
     </div>
   );
 };

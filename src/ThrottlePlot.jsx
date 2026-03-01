@@ -26,8 +26,8 @@ const ThrottlePlot = () => {
       .then(data => {
         // NOT CORRECT DATA YET
         const coordArray = data.map(item => ({
-          x: item.Acc_X,
-          y: item.Acc_Z
+          x: parseFloat(item.t_25),
+          y: parseFloat(item.FSM_throttlePos)
         }));
         setCoordinates(coordArray);
       })
@@ -35,13 +35,12 @@ const ThrottlePlot = () => {
   }, [lapCount]);
 
   const data = {
-    labels: coordinates.map((point, index) => index),
     datasets: [
       {
-        label: 'Throttle',
-        data: coordinates.map(point => point.y),
+        label: 'Throttle Position',
+        data: coordinates,
         borderColor: '#AF1328',
-        borderWidth: 0.2,
+        borderWidth: 1.0,
         fill: false,
         tension: 0.1,
         pointRadius: 0
@@ -54,6 +53,15 @@ const ThrottlePlot = () => {
     maintainAspectRatio: false,
     scales: {
       x: {
+        type: 'linear',
+        title: {
+          display: true,
+          text: 'Time (seconds?)',
+          color: 'white',
+          font: {
+            size: 12,
+          },
+        },
         ticks: {
           color: 'white',
         },
@@ -62,6 +70,14 @@ const ThrottlePlot = () => {
         },
       },
       y: {
+        title: {
+          display: true,
+          text: 'Throttle Position',
+          color: 'white',
+          font: {
+            size: 12,
+          },
+        },
         ticks: {
           color: 'white',
         },

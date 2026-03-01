@@ -200,7 +200,7 @@ canvas {
 .data-graphs {
   display: flex;
   flex-direction: column;
-  /* gap: 20px; */
+  gap: 50px;
   width: 450px;
   background: var(--module-grey);
   color: var(--text-white);
@@ -239,7 +239,7 @@ canvas {
 }
 
 .heatmap {
-  height: 150px;
+  height: 230px;
   flex-direction: column;
   color: var(--text-white);
   border-radius: 5px;
