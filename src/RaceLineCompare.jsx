@@ -106,29 +106,29 @@ const RaceLineCompare = () => {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Find min & max values for normalization
-  let xMin = Infinity;
-  let xMax = -Infinity;
-  let yMin = Infinity;
-  let yMax = -Infinity;
-  let brakeMin = Infinity;
-  let brakeMax = -Infinity;
-  let throttleMin = Infinity;
-  let throttleMax = -Infinity;
-
-  for (const p of points1.concat(points2)) {
-    if (p.x < xMin) xMin = p.x;
-    if (p.x > xMax) xMax = p.x;
-    if (p.y < yMin) yMin = p.y;
-    if (p.y > yMax) yMax = p.y;
-    if (p.Brake < brakeMin) brakeMin = p.Brake;
-    if (p.Brake > brakeMax) brakeMax = p.Brake;
-    if (p.Throttle < throttleMin) throttleMin = p.Throttle;
-    if (p.Throttle > throttleMax) throttleMax = p.Throttle;
-  }
-
   const drawLap = (points, xOffset = 0) => {
     if (!points.length) return;
+
+    // Find min & max values for normalization
+    let xMin = Infinity;
+    let xMax = -Infinity;
+    let yMin = Infinity;
+    let yMax = -Infinity;
+    let brakeMin = Infinity;
+    let brakeMax = -Infinity;
+    let throttleMin = Infinity;
+    let throttleMax = -Infinity;
+
+    for (const p of points) {
+      if (p.x < xMin) xMin = p.x;
+      if (p.x > xMax) xMax = p.x;
+      if (p.y < yMin) yMin = p.y;
+      if (p.y > yMax) yMax = p.y;
+      if (p.Brake < brakeMin) brakeMin = p.Brake;
+      if (p.Brake > brakeMax) brakeMax = p.Brake;
+      if (p.Throttle < throttleMin) throttleMin = p.Throttle;
+      if (p.Throttle > throttleMax) throttleMax = p.Throttle;
+    }
 
     const xRange = xMax - xMin || 1;
     const yRange = yMax - yMin || 1;
