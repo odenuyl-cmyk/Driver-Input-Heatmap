@@ -94,8 +94,7 @@ const normalize = (value, min, max) => {
         if (p.Brake > brakeMax) brakeMax = p.Brake;
         if (p.Throttle < throttleMin) throttleMin = p.Throttle;
         if (p.Throttle > throttleMax) throttleMax = p.Throttle;
-        
-}
+      }
 
       //const brakeMin = parseFloat(Math.min(...points.map(p => p.Brake)));
       //const brakeMax = parseFloat(Math.max(...points.map(p => p.Brake)));
