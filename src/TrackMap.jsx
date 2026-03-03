@@ -16,8 +16,8 @@ const TrackMap = ({mode, setMode}) => {
         setDataVersion(state.version);
         setCount(state.counter);
         setMode(state.mode);
-        setCompareLap1(state.lapCompare1 + 1);
-        setCompareLap2(state.lapCompare2 + 1);
+        setCompareLap1(state.lapCompare1);
+        setCompareLap2(state.lapCompare2);
       }
     }, 100);
 

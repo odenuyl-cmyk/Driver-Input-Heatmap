@@ -1,0 +1,13 @@
+{
+  "source_file": "1772575915916_logfile_2025-04-23_13-30-16.mdf",
+  "full_data_file": "full_data.json",
+  "lap_files": [
+    "laps\\lap_1.json",
+    "laps\\lap_2.json"
+  ],
+  "lap_stats_files": [
+    "laps\\lap_1_stats.json",
+    "laps\\lap_2_stats.json"
+  ],
+  "lap_count": 2
+}

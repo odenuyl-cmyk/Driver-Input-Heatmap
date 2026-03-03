@@ -27,7 +27,7 @@ const BrakePlot = () => {
       .then(data => {
         // NOT CORRECT DATA YET 
         const coordArray = data.map(item => ({
-          x: item.t_25,
+          x: item.time - data[0].time,
           y: item.FSM_brakePressureFront
         }));
         setCoordinates(coordArray);
