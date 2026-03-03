@@ -48,7 +48,7 @@ const parseUploadedFile = async (req) => {
 const runImportPipeline = async (inputPath, outputDir) => {
   const scriptPath = path.resolve(process.cwd(), 'src', 'full_data.py');
   await execFileAsync(
-    'python',
+    'python3',
     ['-u', scriptPath, '--input', inputPath, '--output', outputDir],
     { cwd: process.cwd(), maxBuffer: 1024 * 1024 * 8 }
   );

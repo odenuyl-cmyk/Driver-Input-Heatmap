@@ -26,7 +26,7 @@ SELECTED_SIGNALS = [
     "CDC_Latitude",
     "CDC_Longitude",
     "POSE_latitude_deg",
-    "POSE_longitude_deg"
+    "POSE_longitude_deg",
 ]
 
 LATITUDE_CANDIDATES = [
