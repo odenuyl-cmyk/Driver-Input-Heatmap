@@ -26,7 +26,7 @@ const ThrottlePlot = () => {
       .then(data => {
         // NOT CORRECT DATA YET
         const coordArray = data.map(item => ({
-          x: parseFloat(item.t_25),
+          x: parseFloat(item.time - data[0].time),
           y: parseFloat(item.FSM_throttlePos)
         }));
         setCoordinates(coordArray);

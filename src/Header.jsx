@@ -46,7 +46,8 @@ const Header = () => {
       state.laps = lapFiles;
       state.counter = 1;
       state.mode = 1;
-      state.lapCompare = [0, Math.min(1, lapFiles.length - 1)];
+      state.lapCompare1 = 1;
+      state.lapCompare2 = 1;
       state.version += 1;
 
       setImportStatus(`Imported ${lapFiles.length} lap(s).`);
