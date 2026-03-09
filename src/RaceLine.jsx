@@ -27,7 +27,9 @@ const normalize = (value, min, max) => {
 
 
     const canvasRef = useRef(null);
+    const scaledPointsRef = useRef([]);
     const [points, setCoordinates] = useState([]);
+    const [hoverPoint, setHoverPoint] = useState(null);
     
     // Automatically track container size
     const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
@@ -66,9 +68,11 @@ const normalize = (value, min, max) => {
             Ay: parseFloat(item.Movella_AccY),
             Az: parseFloat(item.Movella_AccZ),
             Brake: parseFloat(item.FSM_brakePressureFront),
-            Throttle: parseFloat(item.FSM_throttlePos)
+            Throttle: parseFloat(item.FSM_throttlePos),
+            SwAngle: parseFloat(item.FSM_steeringWheelAngle)
           }));
           setCoordinates(coordArray);
+          setHoverPoint(null);
         })
         .catch(error => console.error('Error fetching the data:', error));
     }, [lapCount, dataVersion]);
@@ -107,17 +111,23 @@ const normalize = (value, min, max) => {
 
       //const brakeMin = parseFloat(Math.min(...points.map(p => p.Brake)));
       //const brakeMax = parseFloat(Math.max(...points.map(p => p.Brake)));
+      const xRange = xMax - xMin || 1;
+      const yRange = yMax - yMin || 1;
 
       // Normalize and Scale Points
       const scaledPoints = points.map(p => ({
-        x: ((p.x - xMin) / (xMax - xMin)) * parseFloat(0.9*canvas.width) + parseFloat(0.05*canvas.width),
-        y: canvas.height - ((p.y - yMin) / (yMax - yMin)) * parseFloat(0.9*canvas.height) - parseFloat(0.05*canvas.height), // Invert y-axis
+        x: ((p.x - xMin) / xRange) * parseFloat(0.9*canvas.width) + parseFloat(0.05*canvas.width),
+        y: canvas.height - ((p.y - yMin) / yRange) * parseFloat(0.9*canvas.height) - parseFloat(0.05*canvas.height), // Invert y-axis
         Ax: p.Ax,
         Ay: p.Ay,
         Az: p.Az,
-        Brake: normalize(p.Brake, brakeMin, brakeMax),
-        Throttle: normalize(p.Throttle, throttleMin, throttleMax)
+        BrakeRaw: p.Brake,
+        ThrottleRaw: p.Throttle,
+        SwAngleRaw: p.SwAngle,
+        BrakeNorm: normalize(p.Brake, brakeMin, brakeMax),
+        ThrottleNorm: normalize(p.Throttle, throttleMin, throttleMax)
       }));
+      scaledPointsRef.current = scaledPoints;
 
       // Draw spline
       // ctx.beginPath();
@@ -131,8 +141,8 @@ const normalize = (value, min, max) => {
         ctx.moveTo(scaledPoints[i-1].x, scaledPoints[i-1].y);
         ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].y, midX, midY);
         ctx.strokeStyle = `rgb(
-        ${Math.floor(scaledPoints[i].Brake * 255)},
-        ${Math.floor(scaledPoints[i].Throttle * 255)},
+        ${Math.floor(scaledPoints[i].BrakeNorm * 255)},
+        ${Math.floor(scaledPoints[i].ThrottleNorm * 255)},
         ${0})`;
         ctx.lineWidth = 10;
         ctx.stroke();
@@ -149,8 +159,82 @@ const normalize = (value, min, max) => {
 
     }, [points, canvasSize]);
 
+    const handleMouseMove = (event) => {
+      const canvas = canvasRef.current;
+      const scaledPoints = scaledPointsRef.current;
+      if (!canvas || scaledPoints.length === 0) {
+        setHoverPoint(null);
+        return;
+      }
+
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const mouseX = (event.clientX - rect.left) * scaleX;
+      const mouseY = (event.clientY - rect.top) * scaleY;
+
+      let nearest = null;
+      let minDistSq = Infinity;
+
+      for (const point of scaledPoints) {
+        const dx = point.x - mouseX;
+        const dy = point.y - mouseY;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < minDistSq) {
+          minDistSq = distSq;
+          nearest = point;
+        }
+      }
+
+      const hoverRadiusPx = 14;
+      if (!nearest || minDistSq > hoverRadiusPx * hoverRadiusPx) {
+        setHoverPoint(null);
+        return;
+      }
+
+      setHoverPoint({
+        x: nearest.x,
+        y: nearest.y,
+        throttle: nearest.ThrottleRaw,
+        brake: nearest.BrakeRaw,
+        swAngle: nearest.SwAngleRaw
+      });
+    };
+
+    const handleMouseLeave = () => {
+      setHoverPoint(null);
+    };
+
     return (
-      <canvas ref={canvasRef} style={{ width: "100%", height: "100%" }} />
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+        <canvas
+          ref={canvasRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{ width: "100%", height: "100%" }}
+        />
+        {hoverPoint && (
+          <div
+            style={{
+              position: "absolute",
+              left: hoverPoint.x + 12,
+              top: hoverPoint.y + 12,
+              padding: "6px 8px",
+              borderRadius: "6px",
+              background: "rgba(0, 0, 0, 0.85)",
+              color: "#fff",
+              fontSize: "12px",
+              lineHeight: 1.4,
+              pointerEvents: "none",
+              whiteSpace: "nowrap"
+            }}
+          >
+            <div>Throttle: {Number.isFinite(hoverPoint.throttle) ? ((hoverPoint.throttle / 255) * 100).toFixed(1) + "%" : "N/A"}</div>
+            <div>Brake: {Number.isFinite(hoverPoint.brake) ? ((hoverPoint.brake / 255) * 100).toFixed(1) + "%" : "N/A"}</div>
+            <div>SW Angle: {Number.isFinite(hoverPoint.swAngle) ? hoverPoint.swAngle.toFixed(2) : "N/A"}</div>
+          </div>
+        )}
+      </div>
     );
   };
 //}
