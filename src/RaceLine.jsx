@@ -30,6 +30,9 @@ const normalize = (value, min, max) => {
     const scaledPointsRef = useRef([]);
     const [points, setCoordinates] = useState([]);
     const [hoverPoint, setHoverPoint] = useState(null);
+    const [showThrottle, setShowThrottle] = useState(true);
+    const [showBrake, setShowBrake] = useState(true);
+    const [hoverLegend, setHoverLegend] = useState(null);
     
     // Automatically track container size
     const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
@@ -140,10 +143,17 @@ const normalize = (value, min, max) => {
         if (isNaN(midX) || isNaN(midY)) continue;
         ctx.moveTo(scaledPoints[i-1].x, scaledPoints[i-1].y);
         ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].y, midX, midY);
-        ctx.strokeStyle = `rgb(
-        ${Math.floor(scaledPoints[i].BrakeNorm * 255)},
-        ${Math.floor(scaledPoints[i].ThrottleNorm * 255)},
-        ${0})`;
+        
+        let r = 0;
+        let g = 0;
+        if (showBrake) {
+          r = Math.floor(scaledPoints[i].BrakeNorm * 255);
+        }
+        if (showThrottle) {
+          g = Math.floor(scaledPoints[i].ThrottleNorm * 255);
+        }
+        ctx.strokeStyle = `rgb(${r},${g},0)`;
+
         ctx.lineWidth = 10;
         ctx.stroke();
 
@@ -157,7 +167,7 @@ const normalize = (value, min, max) => {
       //ctx.lineWidth = 10;
       //ctx.stroke();
 
-    }, [points, canvasSize]);
+    }, [points, canvasSize, showThrottle, showBrake]);
 
     const handleMouseMove = (event) => {
       const canvas = canvasRef.current;
@@ -213,6 +223,97 @@ const normalize = (value, min, max) => {
           onMouseLeave={handleMouseLeave}
           style={{ width: "100%", height: "100%" }}
         />
+
+        <div
+          style={{
+            position: "absolute",
+            top: -20,
+            right: -6,
+            background: "rgba(0,0,0,0.8)",
+            color: "#fff",
+            padding: "8px 10px",
+            borderRadius: "6px",
+            fontSize: "12px"
+          }}
+        >
+
+          <div style={{fontSize:10, opacity:0.7, marginBottom:6}}>
+            Click to toggle
+          </div>
+
+          {/* Throttle */}
+          <div
+            onClick={() => setShowThrottle(!showThrottle)}
+            onMouseEnter={() => setHoverLegend("throttle")}
+            onMouseLeave={() => setHoverLegend(null)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: 6,
+              cursor: "pointer",
+              opacity: showThrottle ? 1 : 0.4,
+              background: hoverLegend === "throttle" ? "rgba(255,255,255,0.1)" : "transparent",
+              padding: "2px 4px",
+              borderRadius: 4
+            }}
+          >
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                background: "rgb(0,255,0)",
+                marginRight: 6,
+                borderRadius: 2,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "black",
+                fontSize: "10px",
+                fontWeight: "bold"
+              }}
+            >
+              {showThrottle ? "✓" : ""}
+            </div>
+            Throttle
+          </div>
+
+          {/* Brake */}
+          <div
+            onClick={() => setShowBrake(!showBrake)}
+            onMouseEnter={() => setHoverLegend("brake")}
+            onMouseLeave={() => setHoverLegend(null)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              opacity: showBrake ? 1 : 0.4,
+              background: hoverLegend === "brake" ? "rgba(255,255,255,0.1)" : "transparent",
+              padding: "2px 4px",
+              borderRadius: 4
+            }}
+          >
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                background: "rgb(255,0,0)",
+                marginRight: 6,
+                borderRadius: 2,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "black",
+                fontSize: "10px",
+                fontWeight: "bold"
+              }}
+            >
+              {showBrake ? "✓" : ""}
+            </div>
+            Brake
+          </div>
+
+        </div>
+
         {hoverPoint && (
           <div
             style={{
