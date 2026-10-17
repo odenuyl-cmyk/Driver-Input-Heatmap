@@ -2,7 +2,8 @@
 
 A web dashboard that shows **where a driver is on throttle and brake around the track**, so laps can be compared side by side. Built for Carnegie Mellon Racing from the car's logged data.
 
-![Track map comparing two laps, colored by throttle (green) and brake (red)](imgs/overview.png)
+<img width="2100" height="1050" alt="image" src="https://github.com/user-attachments/assets/67506973-078d-4105-b40a-03a0c57eef62" />
+
 
 ## Features
 
