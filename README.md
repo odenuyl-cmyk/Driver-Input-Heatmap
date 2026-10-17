@@ -1,75 +1,37 @@
-# Driver-input Heatmap
-This tool creates an interactive heatmap for real-time performance analysis for drivers. It uses live data (brake, throttle, steering angle, and RTK GPS) to generate heatmaps for real-time feedback. Compare current laps to previous ones on any parameter to identify trends and optimize performance. 
+# Driver Input Heatmap
 
+A web dashboard that shows **where a driver is on throttle and brake around the track**, so laps can be compared side by side. Built for Carnegie Mellon Racing from the car's logged data.
 
+![Track map comparing two laps, colored by throttle (green) and brake (red)](imgs/overview.png)
 
---------------------------------------------------------------------------------------------------------------------------------
-# Getting Started with Create React App
+## Features
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- **Track-map heatmap:** the GPS path is colored by throttle (green) and brake (red), scaled per lap. Toggle either channel and hover for exact percentages.
+- **Lap comparison:** view any two laps next to each other, or step through laps one at a time.
+- **Input graphs:** brake pressure and throttle position over time for the selected lap.
+- **Log import:** load a raw `.mdf` log in the browser; a Python script resamples it and splits it into laps.
 
-## Available Scripts
+## Run it
 
-In the project directory, you can run:
+```bash
+npm install
+npm run dev        # open the local URL Vite prints
+```
 
-(use pnpm if npm doesn't work)
+The app opens with a few bundled sample laps (track map only). To load your own data, click **Import** and pick an `.mdf` log. Import runs through the dev server and needs Python 3 available as `python`:
 
-### `npm install`
+```bash
+pip install asammdf numpy
+```
 
-### `npm run dev`
+## Data
 
-Runs the app in the development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Logs are expected to use the team's CAN and GPS channel names (for example `FSM_throttlePos`, `FSM_brakePressureFront`, `Movella_Latitude`). Columns are described in [`column_description.md`](column_description.md).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Stack
 
-### `npm run build`
+React 18 · Vite · Chart.js · HTML canvas · Python (asammdf, NumPy)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Credits
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Built by members of Carnegie Mellon Racing (see Contributors)
