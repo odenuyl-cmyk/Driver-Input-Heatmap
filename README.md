@@ -3,7 +3,6 @@
 A web dashboard that shows **where a driver is on throttle and brake around the track**, so laps can be compared side by side. Built for Carnegie Mellon Racing from the car's logged data.
 
 <img width="1400" height="860" alt="image" src="https://github.com/user-attachments/assets/36d74c66-5383-41ad-aa92-6c07e1771437" />
-<img width="1008" height="1204" alt="image" src="https://github.com/user-attachments/assets/2dbc4d7c-e0f9-4deb-9cc6-74a630e9ed1f" />
 
 
 
