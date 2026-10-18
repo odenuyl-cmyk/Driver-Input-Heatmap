@@ -4,6 +4,8 @@ A web dashboard that shows **where a driver is on throttle and brake around the 
 
 <img width="1400" height="860" alt="image" src="https://github.com/user-attachments/assets/36d74c66-5383-41ad-aa92-6c07e1771437" />
 
+<img width="1268" height="562" alt="image" src="https://github.com/user-attachments/assets/4cb1e69c-ee9a-4a94-a652-6b070f8c6275" />
+
 
 
 ## Features
